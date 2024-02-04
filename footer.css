@@ -9,9 +9,21 @@ footer {
 }
 
 .footer ul li {
-  list-style-type: square;
   padding: 4px;
   margin-left: 18px;
+}
+
+.list-with-square {
+  list-style-type: square !important;
+}
+
+ul li a:hover {
+  color: #d8c255;
+  /* background-color: white; */
+}
+
+.text-yel {
+  color: #d8c255;
 }
 
 .footer h1 {

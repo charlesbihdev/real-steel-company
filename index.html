@@ -3,25 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Real Steel Company</title>
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="./favicon/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="./favicon/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="./favicon/favicon-16x16.png"
-    />
-    <link rel="manifest" href="./favicon/site.webmanifest" />
+    <title>Real Steel co. Ltd</title>
+
+    <!-- <link rel="manifest" href="./favicon/site.webmanifest" /> -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -40,10 +24,10 @@
   <body>
     <div class="mandatory-scroll-snapping" dir="ltr">
       <section
-        class="snap-child relative h-screen flex flex-col text-center text-white"
+        class="bg-black snap-child relative h-screen flex flex-col text-center text-white"
       >
         <div
-          class="video-docker absolute top-0 left-0 w-full h-full overflow-hidden"
+          class="blur-element video-docker absolute top-0 left-0 w-full h-full overflow-hidden"
         >
           <video
             id="myVideo"
@@ -55,83 +39,35 @@
             loop
           ></video>
         </div>
-        <nav class="video-content flex justify-around mt-10 text-2xl">
-          <div class="text-6xl text-red-400 font-extrabold">RSCL</div>
+        <nav class="z-10 flex justify-around mt-10 text-2xl">
+          <img
+            class="mt-[-37px]"
+            src="./icons/logo.png"
+            height="130px"
+            width="180px"
+          />
           <div class="flex">
-            <div class="nav-item">
-              Products
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  x="0px"
-                  y="0px"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="#8E8781"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z"
-                  ></path>
-                </svg>
-              </span>
+            <div class="relative nav-item">
+              <p
+                onmouseover="handleMouseOverFunctions('drop-menu', 'arrow1')"
+                onmouseleave="hidedropdown('drop-menu')"
+                id="product"
+              >
+                Products
+                <span class="relative">
+                  <!-- <i class="fa-sharp fa-solid fa-angle-down"></i> -->
+                  <i
+                    id="arrow1"
+                    class="fa-sharp fa-solid fa-angle-down fa-fade"
+                  ></i>
+                </span>
+              </p>
             </div>
+            <div class="nav-item">Contact Us</div>
+
             <div class="nav-item">
-              Service
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  x="0px"
-                  y="0px"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="#8E8781"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z"
-                  ></path>
-                </svg>
-              </span>
-            </div>
-            <div class="nav-item">
-              Industries<span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  x="0px"
-                  y="0px"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="#8E8781"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z"
-                  ></path>
-                </svg>
-              </span>
-            </div>
-            <div class="nav-item">
-              Brands
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  x="0px"
-                  y="0px"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="#8E8781"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z"
-                  ></path>
-                </svg>
-              </span>
+              About Us
+              <span> </span>
             </div>
           </div>
           <div>
@@ -144,10 +80,56 @@
               />
             </span>
           </div>
+
+          <ul
+            id="drop-menu"
+            onmouseover="showdropdown('drop-menu')"
+            onmouseleave="hidedropdown('drop-menu')"
+            class="hidden pl-5 pt-16 absolute drop-down text-xl text-left z-10 w-50"
+          >
+            <li
+              onmouseover="showdropdown('drop-sub-menu')"
+              onmouseleave="hidedropdown('drop-sub-menu')"
+              class="pr-10"
+            >
+              Lighte construction machine
+              <span>
+                <i id="arrow2" class="fa-sharp fa-solid fa-angle-down"></i>
+              </span>
+            </li>
+            <li>Excavator</li>
+            <li>Wheel Loader</li>
+            <li>Bulldozer</li>
+            <li>Dumpers and Trucks</li>
+            <li>Backhoe</li>
+            <li>Skid Loader</li>
+            <li>Rollers</li>
+            <li>Concrete Mixers</li>
+            <li>Concrete Pumps</li>
+          </ul>
+
+          <ul
+            id="drop-sub-menu"
+            onmouseover="showdropdown('drop-sub-menu')"
+            onmouseleave="hidedropdown('drop-sub-menu')"
+            class="hidden pt-20 absolute sub-drop-down text-xl text-left z-10 w-50"
+          >
+            <li>tractors</li>
+            <li>block machines</li>
+            <li>road construction machines</li>
+            <li>mini excavator</li>
+            <li>lighting tower</li>
+            <li>lifting equipment</li>
+            <li>scaffolding and wood</li>
+            <li>Air conditions</li>
+            <li>solar system</li>
+            <li>generators</li>
+            <li>doors</li>
+          </ul>
         </nav>
 
-        <div class="video-content space-y-2 z-10 my-auto">
-          <h1 class="font-bold text-7xl">Real Steel Company Limited</h1>
+        <div class="relative blur-element video-content space-y-2 my-auto">
+          <h1 class="font-bold text-7xl">Real Steel co. Ltd</h1>
           <h3 class="font-light text-4xl my-auto mb-10">
             Buy your heavy duty machines from us
           </h3>
@@ -166,138 +148,357 @@
         </div>
       </section>
 
-      <!-- Jumbotron -->
-      <div
-        class="snap-child relative overflow-hidden bg-cover bg-no-repeat p-12 text-center"
-        style="
-          background-image: url('./machines-with-bg/Doosan_excavator.png');
-          height: 100vh;
-        "
-      >
+      <!-- about us -->
+      <section class="bg-black text-white dark:bg-gray-900">
         <div
-          class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed"
-          style="
-            background-color: rgba(0, 0, 0, 0.6);
-            background-position: center;
-          "
+          class="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6"
         >
-          <div class="flex h-full justify-center">
-            <div class="text-white mt-auto mb-20">
-              <h2 class="mb-8 text-5xl font-extrabold">EXCAVATOR</h2>
-              <button
-                type="button"
-                class="rounded !text-black !font-bold bg-white px-10 pb-[6px] tracking-wider pt-[7px] text-lg font-medium uppercase leading-normal text-neutral-50 transition duration-150 ease-in-out hover:border-neutral-100 hover:bg-red-500 hover-text-white"
-              >
-                EXPLORE THE RANGE
-              </button>
-            </div>
+          <div class="font-light text-gray-500 sm:text-lg">
+            <h1
+              class="mb-4 text-6xl tracking-tight font-extrabold text-white dark:text-white"
+            >
+              About Real Steel co. Ltd
+            </h1>
+            <p class="mb-4 text-2xl text-white">
+              We are strategists, designers and developers. Innovators and
+              problem solvers. Small enough to be simple and quick, but big
+              enough to deliver the scope you want at the pace you need. Small
+              enough to be simple and quick, but big enough to deliver the scope
+              you want at the pace you need.
+            </p>
+            <p class="text-2xl text-white">
+              We are strategists, designers and developers. Innovators and
+              problem solvers. Small enough to be simple and quick.
+            </p>
+          </div>
+          <div class="grid grid-cols-2 gap-4 mt-8">
+            <img
+              class="about-img w-full rounded-lg"
+              src="./homepage-images/img3.jpg"
+              alt="office content 1"
+            />
+            <img
+              class="about-img mt-4 w-full lg:mt-10 rounded-lg"
+              src="./homepage-images/img2.jpg"
+              alt="office content 2"
+            />
+          </div>
+        </div>
+      </section>
+      <!-- Container for demo purpose -->
+
+      <div class="grid gap-4 bg-black">
+        <h1
+          class="mb-4 text-6xl tracking-tight font-extrabold text-white text-center"
+        >
+          Mini Gallery
+        </h1>
+        <div>
+          <img
+            class="h-50 rounded-lg gallery-img"
+            src="./machines-with-bg/Doosan_excavator.png"
+            alt=""
+          />
+        </div>
+        <div class="gallery-sm-div grid grid-cols-5 gap-4">
+          <div>
+            <img
+              class="gallery-sm-img max-w-full rounded-lg"
+              src="./machines-with-bg/20m-concrete-pump-2023.jpg"
+              alt=""
+            />
+          </div>
+          <div>
+            <img
+              class="gallery-sm-img max-w-full rounded-lg"
+              src="./machines-with-bg/drill.jpg"
+              alt=""
+            />
+          </div>
+          <div>
+            <img
+              class="gallery-sm-img max-w-full rounded-lg"
+              src="./machines-with-bg/roller.avif"
+              alt=""
+            />
+          </div>
+          <div>
+            <img
+              class="gallery-sm-img max-w-full rounded-lg"
+              src="./machines-with-bg/Diesel_Electric_Generator_100kW.jpg"
+              alt=""
+            />
+          </div>
+          <div>
+            <img
+              class="gallery-sm-img max-w-full rounded-lg"
+              src="./machines-with-bg/wheel loader.png"
+              alt=""
+            />
           </div>
         </div>
       </div>
-      <!-- end jambotron -->
-      <!-- Jumbotron -->
-      <div
-        class="snap-child relative overflow-hidden bg-cover bg-no-repeat p-12 text-center"
-        style="
-          background-image: url('./machines-with-bg/wheel\ loader.png');
-          height: 100vh;
-        "
+
+      <!-- <div class="container my-24 mx-auto md:px-6"> -->
+      <!-- Section: Design Block -->
+      <section
+        class="dark:bg-gray-800 bg-black p-12 text-white border-white dark:text-gray-100"
       >
+        <div class="container flex flex-col items-center mx-auto md:px-12">
+          <h1 class="text-6xl m-10 font-semibold leadi text-center">
+            What our customers are saying about us
+          </h1>
+        </div>
         <div
-          class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed"
-          style="
-            background-color: rgba(0, 0, 0, 0.6);
-            background-position: center;
-          "
+          class="container flex flex-col items-center justify-center mx-auto lg:flex-row lg:flex-wrap lg:justify-evenly lg:px-10"
         >
-          <div class="flex h-full items-center justify-center">
-            <div class="text-white mt-auto mb-20">
-              <h2 class="mb-8 text-5xl font-extrabold">WHEEL LOADER</h2>
-              <button
-                type="button"
-                class="rounded !text-black !font-bold bg-white px-10 pb-[6px] tracking-wider pt-[7px] text-lg font-medium uppercase leading-normal text-neutral-50 transition duration-150 ease-in-out hover:border-neutral-100 hover:bg-red-500 hover-text-white"
+          <div
+            class="flex flex-col max-w-sm mx-4 my-6 shadow-lg border border-white"
+          >
+            <div
+              class="px-4 py-12 rounded-t-lg sm:px-8 md:px-12 dark:bg-gray-900"
+            >
+              <p
+                class="relative px-6 py-1 text-lg italic text-center dark:text-gray-100"
               >
-                EXPLORE THE RANGE
-              </button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  fill="currentColor"
+                  class="w-8 h-8 dark:text-violet-400"
+                >
+                  <path
+                    d="M232,246.857V16H16V416H54.4ZM48,48H200V233.143L48,377.905Z"
+                  ></path>
+                  <path
+                    d="M280,416h38.4L496,246.857V16H280ZM312,48H464V233.143L312,377.905Z"
+                  ></path></svg
+                >Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Voluptatibus quibusdam, eligendi exercitationem molestias
+                possimus facere.
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  fill="currentColor"
+                  class="absolute right-0 w-8 h-8 dark:text-violet-400"
+                >
+                  <path
+                    d="M280,185.143V416H496V16H457.6ZM464,384H312V198.857L464,54.1Z"
+                  ></path>
+                  <path
+                    d="M232,16H193.6L16,185.143V416H232ZM200,384H48V198.857L200,54.1Z"
+                  ></path>
+                </svg>
+              </p>
+            </div>
+            <div
+              class="flex flex-col items-center justify-center p-8 rounded-b-lg dark:bg-violet-400 dark:text-gray-900"
+            >
+              <img
+                src="https://source.unsplash.com/50x50/?portrait?1"
+                alt=""
+                class="w-16 h-16 mb-2 -mt-16 bg-center bg-cover rounded-full dark:bg-gray-500 dark:bg-gray-700"
+              />
+              <p class="text-xl font-semibold leadi">Distinctio Animi</p>
+              <p class="text-sm uppercase">Aliquam illum</p>
+            </div>
+          </div>
+          <div
+            class="flex flex-col max-w-sm mx-4 my-6 shadow-lg border border-white"
+          >
+            <div
+              class="px-4 py-12 rounded-t-lg sm:px-8 md:px-12 dark:bg-gray-900"
+            >
+              <p
+                class="relative px-6 py-1 text-lg italic text-center dark:text-gray-100"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  fill="currentColor"
+                  class="w-8 h-8 dark:text-violet-400"
+                >
+                  <path
+                    d="M232,246.857V16H16V416H54.4ZM48,48H200V233.143L48,377.905Z"
+                  ></path>
+                  <path
+                    d="M280,416h38.4L496,246.857V16H280ZM312,48H464V233.143L312,377.905Z"
+                  ></path></svg
+                >Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Voluptatibus quibusdam, eligendi exercitationem molestias
+                possimus facere.
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  fill="currentColor"
+                  class="absolute right-0 w-8 h-8 dark:text-violet-400"
+                >
+                  <path
+                    d="M280,185.143V416H496V16H457.6ZM464,384H312V198.857L464,54.1Z"
+                  ></path>
+                  <path
+                    d="M232,16H193.6L16,185.143V416H232ZM200,384H48V198.857L200,54.1Z"
+                  ></path>
+                </svg>
+              </p>
+            </div>
+            <div
+              class="flex flex-col items-center justify-center p-8 rounded-b-lg dark:bg-violet-400 dark:text-gray-900"
+            >
+              <img
+                src="https://source.unsplash.com/50x50/?portrait?2"
+                alt=""
+                class="w-16 h-16 mb-2 -mt-16 bg-center bg-cover rounded-full dark:bg-gray-500 dark:bg-gray-700"
+              />
+              <p class="text-xl font-semibold leadi">Distinctio Animi</p>
+              <p class="text-sm uppercase">Aliquam illum</p>
+            </div>
+          </div>
+          <div
+            class="flex flex-col max-w-sm mx-4 my-6 shadow-lg border border-white"
+          >
+            <div
+              class="px-4 py-12 rounded-t-lg sm:px-8 md:px-12 dark:bg-gray-900"
+            >
+              <p
+                class="relative px-6 py-1 text-lg italic text-center dark:text-gray-100"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  fill="currentColor"
+                  class="w-8 h-8 dark:text-violet-400"
+                >
+                  <path
+                    d="M232,246.857V16H16V416H54.4ZM48,48H200V233.143L48,377.905Z"
+                  ></path>
+                  <path
+                    d="M280,416h38.4L496,246.857V16H280ZM312,48H464V233.143L312,377.905Z"
+                  ></path></svg
+                >Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Voluptatibus quibusdam, eligendi exercitationem molestias
+                possimus facere.
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  fill="currentColor"
+                  class="absolute right-0 w-8 h-8 dark:text-violet-400"
+                >
+                  <path
+                    d="M280,185.143V416H496V16H457.6ZM464,384H312V198.857L464,54.1Z"
+                  ></path>
+                  <path
+                    d="M232,16H193.6L16,185.143V416H232ZM200,384H48V198.857L200,54.1Z"
+                  ></path>
+                </svg>
+              </p>
+            </div>
+            <div
+              class="flex flex-col items-center justify-center p-8 rounded-b-lg dark:bg-violet-400 dark:text-gray-900"
+            >
+              <img
+                src="https://source.unsplash.com/50x50/?portrait?3"
+                alt=""
+                class="w-16 h-16 mb-2 -mt-16 bg-center bg-cover rounded-full dark:bg-gray-500 dark:bg-gray-700"
+              />
+              <p class="text-xl font-semibold leadi">Distinctio Animi</p>
+              <p class="text-sm uppercase">Aliquam illum</p>
+            </div>
+          </div>
+          <div
+            class="flex flex-col max-w-sm mx-4 my-6 shadow-lg border border-white"
+          >
+            <div
+              class="px-4 py-12 rounded-t-lg sm:px-8 md:px-12 dark:bg-gray-900"
+            >
+              <p
+                class="relative px-6 py-1 text-lg italic text-center dark:text-gray-100"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  fill="currentColor"
+                  class="w-8 h-8 dark:text-violet-400"
+                >
+                  <path
+                    d="M232,246.857V16H16V416H54.4ZM48,48H200V233.143L48,377.905Z"
+                  ></path>
+                  <path
+                    d="M280,416h38.4L496,246.857V16H280ZM312,48H464V233.143L312,377.905Z"
+                  ></path></svg
+                >Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Voluptatibus quibusdam, eligendi exercitationem molestias
+                possimus facere.
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  fill="currentColor"
+                  class="absolute right-0 w-8 h-8 dark:text-violet-400"
+                >
+                  <path
+                    d="M280,185.143V416H496V16H457.6ZM464,384H312V198.857L464,54.1Z"
+                  ></path>
+                  <path
+                    d="M232,16H193.6L16,185.143V416H232ZM200,384H48V198.857L200,54.1Z"
+                  ></path>
+                </svg>
+              </p>
+            </div>
+            <div
+              class="flex flex-col items-center justify-center p-8 rounded-b-lg dark:bg-violet-400 dark:text-gray-900"
+            >
+              <img
+                src="https://source.unsplash.com/50x50/?portrait?4"
+                alt=""
+                class="w-16 h-16 mb-2 -mt-16 bg-center bg-cover rounded-full dark:bg-gray-500 dark:bg-gray-700"
+              />
+              <p class="text-xl font-semibold leadi">Distinctio Animi</p>
+              <p class="text-sm uppercase">Aliquam illum</p>
             </div>
           </div>
         </div>
-      </div>
-      <!-- end jambotron -->
-      <!-- Jumbotron -->
-      <div
-        class="snap-child relative overflow-hidden bg-cover bg-no-repeat p-12 text-center"
-        style="
-          background-image: url('./machines-with-bg/drill.jpg');
-          height: 100vh;
-        "
-      >
-        <div
-          class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed"
-          style="
-            background-color: rgba(0, 0, 0, 0.6);
-            background-position: center;
-          "
-        >
-          <div class="flex h-full items-center justify-center">
-            <div class="text-white mt-auto mb-20">
-              <h2 class="mb-8 text-5xl font-extrabold">DRILL RIG</h2>
-              <button
-                type="button"
-                class="rounded !text-black !font-bold bg-white px-10 pb-[6px] tracking-wider pt-[7px] text-lg font-medium uppercase leading-normal text-neutral-50 transition duration-150 ease-in-out hover:border-neutral-100 hover:bg-red-500 hover-text-white"
-              >
-                EXPLORE THE RANGE
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- end jambotron -->
-      <!-- Jumbotron -->
-      <div
-        class="snap-child relative overflow-hidden bg-cover bg-no-repeat p-12 text-center"
-        style="
-          background-image: url('./machines-with-bg/roller.avif');
-          background-position: center;
-          height: 100vh;
-        "
-      >
-        <div
-          class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed"
-          style="background-color: rgba(0, 0, 0, 0.6)"
-        >
-          <div class="flex h-full justify-center">
-            <div class="text-white mt-auto mb-20">
-              <h2 class="mb-8 text-5xl font-extrabold">PNEUMATIC ROLLER</h2>
-              <button
-                type="button"
-                class="rounded !text-black !font-bold bg-white px-10 pb-[6px] tracking-wider pt-[7px] text-lg font-medium uppercase leading-normal text-neutral-50 transition duration-150 ease-in-out hover:border-neutral-100 hover:bg-red-500 hover-text-white"
-              >
-                EXPLORE THE RANGE
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- end jambotron -->
+      </section>
+      <!-- Section: Design Block -->
+      <!-- Container for demo purpose -->
       <div
         class="snap-child footer text-lg bg-#1e293b flex py-10 text-white justify-evenly flex-wrap"
       >
-        <ul>
-          <h1 class="font-bold text-xl mb-6">Browse Categories</h1>
-          <hr class="mb-2" />
-
-          <li>Attachments</li>
-          <li>Machinery</li>
-          <li>Plants</li>
-        </ul>
-
-        <ul>
+        <ul class="list-with-square">
           <h1 class="font-bold text-xl mb-6">Quick Links</h1>
           <hr class="mb-2" />
           <li>About Us</li>
           <li>Contact Us</li>
           <li>FAQ's</li>
+        </ul>
+
+        <ul>
+          <h1 class="font-bold text-xl mb-6">Follow Real Steel co. Ltd</h1>
+          <hr class="mb-2" />
+          <ul class="flex hover:text-#1e293b w-100 justify-between text-4xl">
+            <li>
+              <a
+                href="https://www.facebook.com/profile.php? id=100082998979273&mibextid=ZbWKwL"
+              >
+                <i class="fa-brands fa-facebook"></i
+              ></a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/samer-kamleh-9b14ba20b">
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/real_steel.co.ltd/">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+            </li>
+
+            <li>
+              <a href="mailto:sales@realsteelcoltd.com">
+                <i class="fa-solid fa-envelope"></i>
+              </a>
+            </li>
+          </ul>
         </ul>
 
         <ul>
@@ -310,10 +511,11 @@
           </p>
         </ul>
       </div>
+
       <footer
         class="justify-between flex px-10 border-white border-2 border-x-0 font-bold text-white text-center py-5"
       >
-        <p class="mx-2 text-red-400">&copy; 2024 REAL STEEL COMPANY LIMITED</p>
+        <p class="mx-2 text-yel">&copy; 2024 REAL STEEL COMPANY LIMITED</p>
         <span class="">
           DEVELOPED BY
 
