@@ -8,7 +8,8 @@ body {
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
     sans-serif;
   overflow-x: hidden;
-  background-color: black;
+  /* background-color: #1e293b; */
+  background-color: #212121;
 }
 
 /* .mandatory-scroll-snapping::-webkit-scrollbar { */
