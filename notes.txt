@@ -4,3 +4,12 @@ https://the7.io/logistics/contact/
 
 products
 https://tailwindflex.com/@arya/responsive-products-grid
+
+wysiwyg editor
+https://tailwindflex.com/@ip-leroy/wysiwyg-editor-form
+
+dashboard
+https://tailwindflex.com/@brandon/boilerplate-for-admin-panal
+
+quote form
+https://tailwindflex.com/@geoffrey-callaghan/contact-us-form-4

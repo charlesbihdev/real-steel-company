@@ -398,7 +398,7 @@ $fetchProducts = $Products->getPaginatedData($limit, $skip);
           <!--   ✅ Product card - Starts Here 👇 -->
           <div class="product bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
             <a href="./list-product.php?page=<?php echo $page ?>&id=<?php echo $product['id'] ?>">
-              <img src="./admin/assets/products/<?php echo $product['image_src'] ?>" alt="Product" class="h-80 object-cover rounded-t-xl" />
+              <img src="./admin/assets/products/<?php echo $product['image_src'] ?>" alt="Product" class="h-80 w-full object-cover rounded-t-xl" />
               <div class="px-4 py-3">
                 <span class="text-gray-400 mr-3 uppercase text-xs"><?php echo $product['category'] ?></span>
                 <p class="text-2xl font-bold text-black block capitalize"><?php echo $product['productName'] ?></p>
@@ -490,6 +490,11 @@ $fetchProducts = $Products->getPaginatedData($limit, $skip);
         <li>
           <a href="mailto:sales@realsteelcoltd.com">
             <i class="fa-solid fa-envelope"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://wa.link/drtn9l" target="_blank">
+            <i class=" fa-brands fa-whatsapp"></i>
           </a>
         </li>
       </ul>
