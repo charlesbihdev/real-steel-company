@@ -57,83 +57,32 @@ $fetchProducts = $Products->getPaginatedData($limit, $skip);
   <!-- <link rel="manifest" href="./favicon/site.webmanifest" /> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="./footer.css" />
+  <link rel="stylesheet" href="./styles/footer.css" />
   <link href="https://fonts.googleapis.com/css?family=Barlow Condensed" rel="stylesheet" />
   <!-- <link rel="stylesheet" href="./style.css" /> -->
-  <link rel="stylesheet" href="./products.css" />
+  <link rel="stylesheet" href="./styles/product.css" />
+  <!-- <link rel="stylesheet" href="./styles/nav.css" /> -->
   <style>
     .product {
       width: 260px;
+    }
+
+    body {
+      overflow-x: hidden;
     }
   </style>
 </head>
 
 <body>
-  <section class="nav-hero">
-    <nav class="z-10 flex justify-around text-2xl">
-      <a href="./index.html"><img class="mb-3" src="./icons/logo.png" height="130px" width="180px" /></a>
-      <div class="flex">
-        <div class="nav-item pt-10">
-          <p onmouseover="handleMouseOverFunctions('drop-menu', 'arrow1')" onmouseleave="hidedropdown('drop-menu')" id="product">
-            Products
-            <span class="relative">
-              <!-- <i class="fa-sharp fa-solid fa-angle-down"></i> -->
-              <i id="arrow1" class="fa-sharp fa-solid fa-angle-down fa-fade"></i>
-            </span>
-          </p>
-        </div>
-        <div class="nav-item pt-10">Contact Us</div>
+  <?php require_once './inc/nav-hero.php' ?>
 
-        <div class="nav-item pt-10">
-          <a href="./about.html"> About Us</a>
-        </div>
-      </div>
-      <div class="pt-10">
-        My List
-        <span>
-          <img class="inline" src="./icons/icons8-list-64.png" style="height: 23px; width: 20px" />
-        </span>
-      </div>
 
-      <ul id="drop-menu" onmouseover="showdropdown('drop-menu')" onmouseleave="hidedropdown('drop-menu')" class="hidden pl-5 pt-16 absolute drop-down text-xl text-left z-10 w-50">
-        <li onmouseover="showdropdown('drop-sub-menu')" onmouseleave="hidedropdown('drop-sub-menu')" class="pr-10">
-          Lighte construction machine
-          <span>
-            <i id="arrow2" class="fa-sharp fa-solid fa-angle-down"></i>
-          </span>
-        </li>
-        <li>Excavator</li>
-        <li>Wheel Loader</li>
-        <li>Bulldozer</li>
-        <li>Dumpers and Trucks</li>
-        <li>Backhoe</li>
-        <li>Skid Loader</li>
-        <li>Rollers</li>
-        <li>Concrete Mixers</li>
-        <li>Concrete Pumps</li>
-      </ul>
-
-      <ul id="drop-sub-menu" onmouseover="showdropdown('drop-sub-menu')" onmouseleave="hidedropdown('drop-sub-menu')" class="hidden pt-20 absolute sub-drop-down text-xl text-left z-10 w-50">
-        <li>tractors</li>
-        <li>block machines</li>
-        <li>road construction machines</li>
-        <li>mini excavator</li>
-        <li>lighting tower</li>
-        <li>lifting equipment</li>
-        <li>scaffolding and wood</li>
-        <li>Air conditions</li>
-        <li>solar system</li>
-        <li>generators</li>
-        <li>doors</li>
-      </ul>
-    </nav>
-
-    <h1 class="font-extrabold text-7xl text-center pt-36 text-white">Products Listing</h1>
+  <h1 class="font-extrabold text-7xl px-4 text-center pt-36 text-white">Products Listing</h1>
   </section>
 
 
-  <div class="grid grid-cols-12 grid-rows-1 gap-4 ">
-    <div class="border border-red col-span-3">
+  <div class="grid grid-cols-1 sm:grid-cols-12 grid-rows-1 sm:gap-4 w-screen">
+    <div class="filter-div sm:col-span-3">
 
       <!--
   This example requires some changes to your config:
@@ -180,7 +129,7 @@ $fetchProducts = $Products->getPaginatedData($limit, $skip);
               From: "translate-x-0"
               To: "translate-x-full"
           -->
-              <div class="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
+              <div style="display: none;" class=" relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
                 <div class="flex items-center justify-between px-4">
                   <h2 class="text-lg font-medium text-gray-900">FiltersFF</h2>
                   <button type="button" class="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400">
@@ -386,11 +335,16 @@ $fetchProducts = $Products->getPaginatedData($limit, $skip);
 
 
     </div>
-    <div class=" col-span-9 col-start-4">
+    <div class=" sm:col-span-9 sm:col-start-4 ">
 
 
       <!-- source: https://github.com/mfg888/Responsive-Tailwind-CSS-Grid/blob/main/index.html -->
-
+      <button type="button" class="flex -m-2 mt-4 mx-12 p-2 text-2xl text-gray-400 hover:text-gray-500 sm:ml-6 sm:hidden">
+        <span class="mr-4">Filters</span>
+        <svg class="h-8 w-8" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M2.628 1.601C5.028 1.206 7.49 1 10 1s4.973.206 7.372.601a.75.75 0 01.628.74v2.288a2.25 2.25 0 01-.659 1.59l-4.682 4.683a2.25 2.25 0 00-.659 1.59v3.037c0 .684-.31 1.33-.844 1.757l-1.937 1.55A.75.75 0 018 18.25v-5.757a2.25 2.25 0 00-.659-1.591L2.659 6.22A2.25 2.25 0 012 4.629V2.34a.75.75 0 01.628-.74z" clip-rule="evenodd" />
+        </svg>
+      </button>
 
       <!-- ✅ Grid Section - Starts Here 👇 -->
       <section id="Projects" class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-8 gap-x-6 mt-10 mb-5">
@@ -423,104 +377,59 @@ $fetchProducts = $Products->getPaginatedData($limit, $skip);
       <div class="flex justify-end my-6">
         <section aria-label="page-navigation">
           <ul class="flex list-style-none">
+            <!-- Previous Page Link -->
             <li class="page-item <?php echo ($page <= 1) ? 'disabled' : ''; ?>">
-              <a href="./products.php?page=<?php echo ($page <= 1) ? '1' : ($page - 1); ?>" class="relative block px-3 py-1.5 mr-3 text-base text-gray-700 transition-all duration-300 rounded-md dark:text-gray-400 hover:text-gray-100 hover:bg-blue-100">Previous
-              </a>
+              <a href="./products.php?page=<?php echo ($page <= 1) ? '1' : ($page - 1); ?>" class="relative block px-3 py-1.5 mr-3 text-base text-gray-700 transition-all duration-300 rounded-md dark:text-gray-400 hover:text-gray-100 hover:bg-blue-100">Previous</a>
             </li>
 
-            <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
-              <li class="page-item <?php echo ($page == $i) ? 'active' : ''; ?>">
-                <a href="./products.php?page=<?php echo $i; ?>" class="relative block px-3 py-1.5 mr-3 text-base <?php echo ($page == $i) ? 'text-gray-100 bg-blue-600' : 'text-gray-700 dark:text-gray-400 hover:bg-blue-100'; ?> transition-all duration-300 rounded-md"><?php echo $i; ?>
-                </a>
-              </li>
-            <?php endfor; ?>
+            <!-- Page Links -->
+            <?php
+            // Define the number of pages to show before and after the current page
+            $numAdjacentPages = 2;
 
+            // Loop through pages and display ellipsis if needed
+            for ($i = 1; $i <= $totalPages; $i++) :
+              // Show first and last pages
+              if ($i == 1 || $i == $totalPages || abs($i - $page) <= $numAdjacentPages) :
+            ?>
+                <li class="page-item <?php echo ($page == $i) ? 'active' : ''; ?>">
+                  <a href="./products.php?page=<?php echo $i; ?>" class="relative block px-1.5 py-1 mr-2 text-base <?php echo ($page == $i) ? 'text-gray-100 bg-blue-600' : 'text-gray-700 dark:text-gray-400 hover:bg-blue-100'; ?> transition-all duration-300 rounded-md"><?php echo $i; ?></a>
+                </li>
+              <?php
+              // Show ellipsis if not contiguous
+              elseif ($i == 2 && abs($i - $page) > $numAdjacentPages + 1) :
+              ?>
+                <li class="page-item">
+                  <span class="relative block px-3 py-1.5 mr-3 text-base text-gray-700 transition-all duration-300 rounded-md">...</span>
+                </li>
+            <?php
+              endif;
+            endfor;
+            ?>
+
+            <!-- Next Page Link -->
             <li class="page-item <?php echo ($page >= $totalPages) ? 'disabled' : ''; ?>">
-              <a href="./products.php?page=<?php echo ($page >= $totalPages) ? $totalPages : ($page + 1); ?>" class="relative block px-3 py-1.5 text-base text-gray-700 transition-all duration-300 dark:text-gray-400 dark:hover:bg-gray-700 hover:bg-blue-100 rounded-md">Next
-              </a>
+              <a href="./products.php?page=<?php echo ($page >= $totalPages) ? $totalPages : ($page + 1); ?>" class="mr-8 relative block px-1 py-1 text-base text-gray-700 transition-all duration-300 dark:text-gray-400 dark:hover:bg-gray-700 hover:bg-blue-100 rounded-md">Next</a>
             </li>
           </ul>
 
+          <!-- Pagination Info -->
           <?php
           $startRange = ($page - 1) * $limit + 1;
           $endRange = min($startRange + $limit - 1, $totalRecords);
           ?>
           <span class="ml-2 text-gray-700 dark:text-gray-400">
-            Showing <span class="font-semibold text-gray-900 dark:text-white">
-              <?php echo $startRange; ?>
-            </span> to <span class="font-semibold text-gray-900 dark:text-white">
-              <?php echo $endRange; ?>
-            </span> of <span class="font-semibold text-gray-900 dark:text-white"><?php echo $totalRecords ?></span> Entries
+            Showing <span class="font-semibold text-gray-900 dark:text-white"><?php echo $startRange; ?></span> to <span class="font-semibold text-gray-900 dark:text-white"><?php echo $endRange; ?></span> of <span class="font-semibold text-gray-900 dark:text-white"><?php echo $totalRecords ?></span> Entries
           </span>
         </section>
       </div>
+
     </div>
   </div>
 
 
+  <?php require_once './inc/footer.php' ?>
 
-  <div class="snap-child footer text-lg bg-#1e293b flex py-10 text-white justify-evenly flex-wrap">
-    <ul class="list-with-square">
-      <h1 class="font-bold text-xl mb-6">Quick Links</h1>
-      <hr class="mb-2" />
-      <li>About Us</li>
-      <li>Contact Us</li>
-      <li>Products</li>
-    </ul>
-
-    <ul>
-      <h1 class="font-bold text-xl mb-6">Follow Real Steel co. Ltd</h1>
-      <hr class="mb-2" />
-      <ul class="flex hover:text-#1e293b w-100 justify-between text-4xl">
-        <li>
-          <a href="https://www.facebook.com/profile.php? id=100082998979273&mibextid=ZbWKwL" target="_blank">
-            <i class="fa-brands fa-facebook"></i></a>
-        </li>
-        <li>
-          <a href="https://www.linkedin.com/in/samer-kamleh-9b14ba20b" target="_blank">
-            <i class="fa-brands fa-linkedin"></i>
-          </a>
-        </li>
-        <li>
-          <a href="https://www.instagram.com/real_steel.co.ltd/" target="_blank">
-            <i class="fa-brands fa-instagram"></i>
-          </a>
-        </li>
-
-        <li>
-          <a href="mailto:sales@realsteelcoltd.com">
-            <i class="fa-solid fa-envelope"></i>
-          </a>
-        </li>
-        <li>
-          <a href="https://wa.link/drtn9l" target="_blank">
-            <i class=" fa-brands fa-whatsapp"></i>
-          </a>
-        </li>
-      </ul>
-    </ul>
-
-    <ul>
-      <h1 class="font-bold text-xl mb-6 text-justify">About Us</h1>
-      <hr class="mb-2" />
-      <p>
-        Real Steel Company Limited Is commited to providing quality plants
-        and machinery at an affordable cost. Our machinery can be puchased
-        in Ghana, Guinea and Sudan.
-      </p>
-    </ul>
-  </div>
-
-  <footer class="justify-between flex px-10 border-white border-2 border-x-0 font-bold text-white text-center py-5">
-    <p class="mx-2 text-yellow-500">&copy; 2024 REAL STEEL COMPANY LIMITED</p>
-    <span class="">
-      DEVELOPED BY
-
-      <a class="text-yellow-500" target="_blank" href="https://linktr.ee/charlesbihdev">CHARLES OWUSU BIH
-      </a>
-    </span>
-  </footer>
-  </div>
   <!-- Support Me 🙏🥰 -->
   <!-- <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
   <script>

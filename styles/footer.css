@@ -1,0 +1,37 @@
+/* newsletter box end  */
+.footer,
+footer {
+  background-color: #212121;
+}
+
+.footer ul {
+  width: 280px;
+}
+
+.footer ul li {
+  padding: 4px;
+  margin-left: 18px;
+}
+
+.list-with-square {
+  list-style-type: square !important;
+}
+
+ul li a:hover {
+  color: #d8c255;
+  /* background-color: white; */
+}
+
+.text-yel {
+  color: #d8c255;
+}
+
+.footer h1 {
+  font-family: "Gilroy", sans-serif !important;
+}
+/* Small screens and below */
+@media (max-width: 639px) {
+  .footer ul:not(:nth-child(2)) {
+    margin-bottom: 45px;
+  }
+}

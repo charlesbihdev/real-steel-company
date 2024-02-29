@@ -58,10 +58,10 @@ $firstImg = $fetchImages[0]['src'];
     <!-- flowbite css  -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./footer.css" />
+    <link rel="stylesheet" href="./styles/footer.css" />
     <link href="https://fonts.googleapis.com/css?family=Barlow Condensed" rel="stylesheet" />
     <!-- <link rel="stylesheet" href="./style.css" /> -->
-    <link rel="stylesheet" href="./products.css" />
+    <link rel="stylesheet" href="./styles/product.css" />
     <style>
         .product {
             width: 260px;
@@ -70,66 +70,10 @@ $firstImg = $fetchImages[0]['src'];
 </head>
 
 <body>
-    <section class="nav-hero">
-        <nav class="z-10 flex justify-around text-2xl">
-            <a href="./index.html"><img class="mb-3" src="./icons/logo.png" height="130px" width="180px" /></a>
-            <div class="flex">
-                <div class="nav-item pt-10">
-                    <p onmouseover="handleMouseOverFunctions('drop-menu', 'arrow1')" onmouseleave="hidedropdown('drop-menu')" id="product">
-                        Products
-                        <span class="relative">
-                            <!-- <i class="fa-sharp fa-solid fa-angle-down"></i> -->
-                            <i id="arrow1" class="fa-sharp fa-solid fa-angle-down fa-fade"></i>
-                        </span>
-                    </p>
-                </div>
-                <div class="nav-item pt-10">Contact Us</div>
+    <?php require_once './inc/nav-hero.php' ?>
 
-                <div class="nav-item pt-10">
-                    <a href="./about.html"> About Us</a>
-                </div>
-            </div>
-            <div class="pt-10">
-                My List
-                <span>
-                    <img class="inline" src="./icons/icons8-list-64.png" style="height: 23px; width: 20px" />
-                </span>
-            </div>
 
-            <ul id="drop-menu" onmouseover="showdropdown('drop-menu')" onmouseleave="hidedropdown('drop-menu')" class="hidden pl-5 pt-16 absolute drop-down text-xl text-left z-10 w-50">
-                <li onmouseover="showdropdown('drop-sub-menu')" onmouseleave="hidedropdown('drop-sub-menu')" class="pr-10">
-                    Lighte construction machine
-                    <span>
-                        <i id="arrow2" class="fa-sharp fa-solid fa-angle-down"></i>
-                    </span>
-                </li>
-                <li>Excavator</li>
-                <li>Wheel Loader</li>
-                <li>Bulldozer</li>
-                <li>Dumpers and Trucks</li>
-                <li>Backhoe</li>
-                <li>Skid Loader</li>
-                <li>Rollers</li>
-                <li>Concrete Mixers</li>
-                <li>Concrete Pumps</li>
-            </ul>
-
-            <ul id="drop-sub-menu" onmouseover="showdropdown('drop-sub-menu')" onmouseleave="hidedropdown('drop-sub-menu')" class="hidden pt-20 absolute sub-drop-down text-xl text-left z-10 w-50">
-                <li>tractors</li>
-                <li>block machines</li>
-                <li>road construction machines</li>
-                <li>mini excavator</li>
-                <li>lighting tower</li>
-                <li>lifting equipment</li>
-                <li>scaffolding and wood</li>
-                <li>Air conditions</li>
-                <li>solar system</li>
-                <li>generators</li>
-                <li>doors</li>
-            </ul>
-        </nav>
-
-        <h1 class="font-extrabold text-7xl text-center pt-36 text-white">Products Listing</h1>
+    <h1 class="font-extrabold text-7xl text-center pt-36 text-white">Products Listing</h1>
     </section>
     <section class="flex flex-wrap mx-6 mt-6 justify-between">
         <a href="./products.php?page=<?php echo $page ?>">
@@ -389,68 +333,7 @@ $firstImg = $fetchImages[0]['src'];
     </section>
 
 
-    <div class="snap-child footer text-lg bg-#1e293b flex py-10 text-white justify-evenly flex-wrap">
-        <ul class="list-with-square">
-            <h1 class="font-bold text-xl mb-6">Quick Links</h1>
-            <hr class="mb-2" />
-            <li>About Us</li>
-            <li>Contact Us</li>
-            <li>Products</li>
-        </ul>
-
-        <ul>
-            <h1 class="font-bold text-xl mb-6">Follow Real Steel co. Ltd</h1>
-            <hr class="mb-2" />
-            <ul class="flex hover:text-#1e293b w-100 justify-between text-4xl">
-                <li>
-                    <a href="https://www.facebook.com/profile.php? id=100082998979273&mibextid=ZbWKwL" target="_blank">
-                        <i class="fa-brands fa-facebook"></i></a>
-                </li>
-                <li>
-                    <a href="https://www.linkedin.com/in/samer-kamleh-9b14ba20b" target="_blank">
-                        <i class="fa-brands fa-linkedin"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.instagram.com/real_steel.co.ltd/" target="_blank">
-                        <i class="fa-brands fa-instagram"></i>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="mailto:sales@realsteelcoltd.com">
-                        <i class="fa-solid fa-envelope"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://wa.link/drtn9l" target="_blank">
-                        <i class=" fa-brands fa-whatsapp"></i>
-                    </a>
-                </li>
-            </ul>
-        </ul>
-
-        <ul>
-            <h1 class="font-bold text-xl mb-6 text-justify">About Us</h1>
-            <hr class="mb-2" />
-            <p>
-                Real Steel Company Limited Is commited to providing quality plants
-                and machinery at an affordable cost. Our machinery can be puchased
-                in Ghana, Guinea and Sudan.
-            </p>
-        </ul>
-    </div>
-
-    <footer class="justify-between flex px-10 border-white border-2 border-x-0 font-bold text-white text-center py-5">
-        <p class="mx-2 text-yellow-500">&copy; 2024 REAL STEEL COMPANY LIMITED</p>
-        <span class="">
-            DEVELOPED BY
-
-            <a class="text-yellow-500" target="_blank" href="https://linktr.ee/charlesbihdev">CHARLES OWUSU BIH
-            </a>
-        </span>
-    </footer>
-    </div>
+    <?php require_once './inc/footer.php' ?>
     <!-- Support Me 🙏🥰 -->
     <!-- <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
   <script>
@@ -464,6 +347,9 @@ $firstImg = $fetchImages[0]['src'];
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 
+    <script src="https://unpkg.com/flowbite@1.4.1/dist/flowbite.js"></script>
+
+    <!-- <script src="./scripts/togglemenu.js"></script> -->
     <script src="./scripts/togglemenu.js"></script>
     <script>
         // Get the authentication modal element
