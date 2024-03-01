@@ -3,8 +3,14 @@
 require_once('./admin/database/config.php');
 require_once('./admin/inc/auxilliaries.php');
 
+$alert = "";
+$cur_page = 'products';
+
 $Products = new Admin($pdo, "products");
 $ProductsImg = new Admin($pdo, "productimages");
+
+
+$Quotes = new Admin($pdo, "tbl_quotes");
 
 
 if (isset($_GET['id']) && $_GET['page']) {
@@ -16,32 +22,42 @@ $fetchProduct = $Products->read('id', $id)[0];
 $fetchImages = $ProductsImg->read('productId', $id);
 $firstImg = $fetchImages[0]['src'];
 
-// print_r($fetchProduct);
-// print_r($fetchImages);
-// print_r($fetchProducts);
-// if (isset($_POST['submit'])) {
-//   $quote = new Admin($pdo, "tbl_quote");
+// Check if the form was submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    // Create a new instance of the Admin class for the 'tbl_quotes' table
+    $Quotes = new Admin($pdo, "tbl_quotes");
 
-//   $firstname = $_POST['firstname'];
-//   $details = $_POST['details'];
-//   $type = $_POST['type'];
-//   $phone = $_POST['phone'];
-//   $email = $_POST['email'];
+    // Retrieve form data and sanitize/validate it as needed
+    $productName = $_POST['productName'];
+    $productId = $_POST['productId'];
+    $firstName = $_POST['first_name'];
+    $lastName = $_POST['last_name'];
+    $companyName = $_POST['company_name'];
+    $address = $_POST['address'];
+    $country = $_POST['country'];
+    $email = $_POST['email'];
+    $phoneNumber = $_POST['phone_number'];
+    $message = $_POST['message'];
 
+    // Prepare the data to be inserted into the database
+    $quoteData = [
+        'productId' => $productId,
+        'productName' => $productName,
+        'fullname' => $firstName . ' ' . $lastName,
+        'address' => $address,
+        'company' => $companyName,
+        'country' => $country,
+        'message' => $message,
+        'phone' => $phoneNumber,
+        'email' => $email
+    ];
 
-//   $quoteInfo = [
-//     'firstname' => $firstname,
-//     'details' => $details,
-//     'type' => $type,
-//     'phone' => $phone,
-//     'email' => $email,
-//   ];
-
-//   if ($quote->create($quoteInfo)) {
-//     $message = 'Quote submitted Successfully';
-//   }
-// }
+    // Insert the data into the database
+    if ($Quotes->create($quoteData)) {
+        $alert = "showAlert('success', 'Quote submitted successfully')";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -62,6 +78,11 @@ $firstImg = $fetchImages[0]['src'];
     <link href="https://fonts.googleapis.com/css?family=Barlow Condensed" rel="stylesheet" />
     <!-- <link rel="stylesheet" href="./style.css" /> -->
     <link rel="stylesheet" href="./styles/product.css" />
+
+    <!-- sweet alert  -->
+    <link rel="stylesheet" href="./styles/sweetalert.css">
+    <script src="./inc/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="./scripts/sweetalert.js"></script>
     <style>
         .product {
             width: 260px;
@@ -70,6 +91,11 @@ $firstImg = $fetchImages[0]['src'];
 </head>
 
 <body>
+    <?php
+    echo "<script>";
+    echo $alert;
+    echo "</script>";
+    ?>
     <?php require_once './inc/nav-hero.php' ?>
 
 
@@ -77,7 +103,7 @@ $firstImg = $fetchImages[0]['src'];
     </section>
     <section class="flex flex-wrap mx-6 mt-6 justify-between">
         <a href="./products.php?page=<?php echo $page ?>">
-            <button type="button" class="w-full flex items-center justify-center w-1/2 px-5 py-2 text-lg text-gray-700 transition-colors duration-200 bg-gray-300 hover:bg-gray-400 border rounded-lg gap-x-2 sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-gray-200 dark:border-gray-700">
+            <button type="button" class="w-full flex items-center justify-center w-1/2 px-5 py-2 text-lg text-gray-700 transition-colors duration-200 bg-gray-300 hover:bg-gray-400 border rounded-lg sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-gray-200 dark:border-gray-700 ">
                 <svg class="w-5 h-5 rtl:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
                 </svg>
@@ -87,7 +113,7 @@ $firstImg = $fetchImages[0]['src'];
 
         <a href="https://wa.link/drtn9l" target="_blank">
             <i class="text-5xl mr-3 fa-brands fa-whatsapp"></i>
-            <span class="text-xl mr-10">+233543670506</span>
+            <span class="text-xl sm:mr-10">+233543670506</span>
         </a>
 
     </section>
@@ -268,19 +294,27 @@ $firstImg = $fetchImages[0]['src'];
                                                     WE NEED SOME INFO ABOUT YOU
                                                 </h3>
 
-                                                <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
-                                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                                    </svg>
-                                                    <span class="sr-only">Close modal</span>
-                                                </button>
+                                                <a href="./list-product.php?page=<?php echo $page ?>&id=<?php echo $id ?>">
+
+                                                    <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
+                                                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                                        </svg>
+                                                        <span class="sr-only">Close modal</span>
+                                                    </button></a>
                                             </div>
                                             <h2 class="text-md text-center">
                                                 Please fill the form to request your non-binding quote
                                             </h2>
                                             <!-- Modal body -->
                                             <div class="p-4 md:p-5">
-                                                <form class="space-y-4" action="#" method="POST">
+                                                <form class="space-y-4" action="" method="POST">
+                                                    <div>
+                                                        <label for="industry" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Name</label>
+                                                        <input type="text" name="productName" id="productName" placeholder="Product Name" value="<?php echo $fetchProduct['productName']; ?>" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" request readonly />
+                                                    </div>
+
+                                                    <input type="hidden" name="productId" value="<?php echo $fetchProduct['id']; ?>">
                                                     <div>
                                                         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name*</label>
                                                         <input type="text" name="first_name" id="first_name" placeholder="Your first name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
@@ -290,8 +324,8 @@ $firstImg = $fetchImages[0]['src'];
                                                         <input type="text" name="last_name" id="last_name" placeholder="Your last name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
                                                     </div>
                                                     <div>
-                                                        <label for="company_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company Name*</label>
-                                                        <input type="text" name="company_name" id="company_name" placeholder="Your company name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
+                                                        <label for="company_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company Name</label>
+                                                        <input type="text" name="company_name" id="company_name" placeholder="Your company name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
                                                     </div>
                                                     <div>
                                                         <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address*</label>
@@ -301,10 +335,7 @@ $firstImg = $fetchImages[0]['src'];
                                                         <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country*</label>
                                                         <input type="text" name="country" id="country" placeholder="Your country" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
                                                     </div>
-                                                    <div>
-                                                        <label for="industry" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Industry*</label>
-                                                        <input type="text" name="industry" id="industry" placeholder="Your industry" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
-                                                    </div>
+
                                                     <div>
                                                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Email Address*</label>
                                                         <input type="email" name="email" id="email" placeholder="name@company.com" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
@@ -317,7 +348,7 @@ $firstImg = $fetchImages[0]['src'];
                                                         <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Message (optional)</label>
                                                         <textarea name="message" id="message" placeholder="Your message" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"></textarea>
                                                     </div>
-                                                    <button type="submit" class="w-full text-white bg-yellow-500 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                    <button name="submit" type="submit" class="w-full text-white bg-yellow-500 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                                         Send me a non-binding quote
                                                     </button>
                                                 </form>

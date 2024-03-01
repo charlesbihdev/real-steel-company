@@ -3,9 +3,9 @@
       <ul class="list-with-square">
           <h1 class="font-bold text-xl mb-6">Quick Links</h1>
           <hr class="mb-2" />
-          <li><a href="./products.php">Products</a></li>
-          <li><a href="./about.php"> About Us</a></li>
-          <li><a href="./contact.php"> Contact Us</a>
+          <li><a class="<?php echo $cur_page == 'products' ? "active" : "" ?>" href="./products.php">Products</a></li>
+          <li><a class="<?php echo $cur_page == 'about' ? "active" : "" ?>" href="./about.php"> About Us</a></li>
+          <li><a class="<?php echo $cur_page == 'contact' ? "active" : "" ?>" href="./contact.php"> Contact Us</a>
           </li>
       </ul>
 

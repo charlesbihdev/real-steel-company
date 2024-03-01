@@ -1,3 +1,7 @@
+<?php
+$cur_page = 'about';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,17 +36,21 @@
             <h2 class="!text-6xl text-yellow-500 font-bold md:text-4xl">
               About Real Steel co. Ltd
             </h2>
-            <p class="text-xl mt-6 text-gray-600">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum
-              omnis voluptatem accusantium nemo perspiciatis delectus atque
-              autem! Voluptatum tenetur beatae unde aperiam, repellat expedita
-              consequatur! Officiis id consequatur atque doloremque!
-            </p>
-            <p class="text-xl mt-4 text-gray-600">
-              Nobis minus voluptatibus pariatur dignissimos libero quaerat
-              iure expedita at? Asperiores nemo possimus nesciunt dicta veniam
-              aspernatur quam mollitia.
-            </p>
+            <div class="text-justify">
+              <p class="text-xl mt-6 text-gray-600">
+                Real Steel Enterprises is a trusted industry leader specializing in the supply of top-quality mining, construction, and road construction equipment, as well as spare parts. With a dedicated focus on excellence, we ensure that each product meets the highest standards of durability and performance.
+              </p>
+              <p class="text-xl mt-4 text-gray-600">
+                In addition to our extensive range of equipment, we also offer solar systems and generators, providing reliable solutions for sustainable energy needs. Our commitment to customer satisfaction extends beyond the point of sale, as we offer real warranties and comprehensive after-sales service to ensure peace of mind for our clients.
+              </p>
+              <p class="text-xl mt-4 text-gray-600">
+                At Real Steel Enterprises, we understand the importance of a seamless purchasing experience. That's why we have assembled a professional sales team dedicated to providing personalized assistance and expert guidance every step of the way. With our expertise and dedication to customer service, we strive to make buying easier and more rewarding for our valued customers.
+              </p>
+              <p class="text-xl mt-4 text-gray-600">
+                Partner with Real Steel Enterprises for all your equipment and energy solution needs, and experience the difference that quality, reliability, and exceptional service can make.
+              </p>
+            </div>
+
           </div>
         </div>
       </div>
@@ -63,9 +71,7 @@
           <div class="mt-5">
             <h3 class="text-2xl !font-extrabold text-yellow-500">Mission</h3>
             <p class="mt-2 text-lg text-white">
-              We aim to make the world a better place through innovation and
-              collaboration.
-            </p>
+              Our mission is to provide reliable and efficient solutions in the construction and mining industries. We aim to empower our customers with cutting-edge equipment and unparalleled service, driving success and growth in their endeavors.
           </div>
         </div>
         <div>
@@ -77,8 +83,7 @@
           <div class="mt-5">
             <h3 class="text-2xl !font-extrabold text-yellow-500">Values</h3>
             <p class="mt-2 text-lg text-white">
-              We believe in honesty, integrity, and respect for all
-              individuals.
+              Our core values of reliability, innovation, and customer commitment drive us to deliver cutting-edge solutions in construction and mining. We strive to lead the industry and empower our customers for success. We ensure that we remain a trusted partner in their endeavors.
             </p>
           </div>
         </div>
@@ -92,9 +97,7 @@
           <div class="mt-5">
             <h3 class="text-2xl !font-extrabold text-yellow-500">Vision</h3>
             <p class="mt-2 text-lg text-white">
-              We envision a world where technology is used to solve the most
-              pressing issues facing humanity and improve people's lives.
-            </p>
+              Our vision is to lead the way in industrial equipment innovation. By continuously pushing the boundaries of technology and service, we aspire to redefine the future of construction and mining, creating lasting value for our customers and stakeholders. </p>
           </div>
         </div>
       </div>

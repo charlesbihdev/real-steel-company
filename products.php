@@ -3,6 +3,9 @@
 require_once('./admin/database/config.php');
 require_once('./admin/inc/auxilliaries.php');
 
+$cur_page = 'products';
+
+
 $Products = new Admin($pdo, "products");
 $Categories = new Admin($pdo, "categories");
 $fetchCategory = $Categories->readAll('id');

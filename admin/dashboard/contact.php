@@ -2,7 +2,7 @@
 
 <section class="content-header">
 	<div class="content-header-left">
-		<h1>View volunteers</h1>
+		<h1>View Contacts</h1>
 	</div>
 
 </section>
@@ -18,16 +18,14 @@
 								<th>SL</th>
 								<th>Full Name</th>
 								<th width="180">Email</th>
-								<th>Phone</th>
-								<th width="200">Home Address</th>
-								<th>Organization</th>
+								<th>Message</th>
 								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php
 							$i = 0;
-							$statement = $pdo->prepare("SELECT * FROM tbl_volunteer");
+							$statement = $pdo->prepare("SELECT * FROM tbl_contacts");
 							$statement->execute();
 							$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 							foreach ($result as $row) {
@@ -37,11 +35,9 @@
 									<td><?php echo $i; ?></td>
 									<td><?php echo $row['fullname']; ?></td>
 									<td><?php echo $row['email']; ?></td>
-									<td><?php echo $row['phone']; ?></td>
-									<td><?php echo $row['address']; ?></td>
-									<td><?php echo $row['organisation']; ?></td>
+									<td><?php echo $row['message']; ?></td>
 									<td>
-										<a href="#" class="btn btn-danger btn-xs" data-href="volunteer-delete.php?id=<?php echo $row['id']; ?>" data-toggle="modal" data-target="#confirm-delete">Delete</a>
+										<a href="#" class="btn btn-danger btn-xs" data-href="contact-delete.php?id=<?php echo $row['id']; ?>" data-toggle="modal" data-target="#confirm-delete">Delete</a>
 									</td>
 								</tr>
 							<?php

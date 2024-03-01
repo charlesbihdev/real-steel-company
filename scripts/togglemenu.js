@@ -43,13 +43,13 @@ function navOpenClose() {
   }
 }
 //blur-lg
-const bluredElements = document.getElementsByClassName("blur-element");
+// const bluredElements = document.getElementsByClassName("blur-element");
 // console.log(bluredElements);
 
-function handleMouseOverFunctions(menuType, arrowType) {
-  showdropdown(menuType);
-  // toggleArrow(arrowType);
-}
+// function handleMouseOverFunctions(menuType, arrowType) {
+//   showdropdown(menuType);
+//   // toggleArrow(arrowType);
+// }
 
 // Add a click event listener to the button
 toggleButton.addEventListener("click", function () {

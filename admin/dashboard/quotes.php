@@ -2,7 +2,7 @@
 
 <section class="content-header">
 	<div class="content-header-left">
-		<h1>View volunteers</h1>
+		<h1>View Quotes</h1>
 	</div>
 
 </section>
@@ -14,20 +14,22 @@
 				<div class="box-body table-responsive">
 					<table id="example1" class="table table-bordered table-striped">
 						<thead>
-							<tr>
-								<th>SL</th>
-								<th>Full Name</th>
-								<th width="180">Email</th>
-								<th>Phone</th>
-								<th width="200">Home Address</th>
-								<th>Organization</th>
-								<th>Action</th>
-							</tr>
+							<th>SL</th>
+							<th>Product Name</th>
+							<th>Full Name</th>
+							<th>Address</th>
+							<th>Company</th>
+							<th>Country</th>
+							<th>Message</th>
+							<th>Phone</th>
+							<th>Email</th>
+							<th>Action</th>
+
 						</thead>
 						<tbody>
 							<?php
 							$i = 0;
-							$statement = $pdo->prepare("SELECT * FROM tbl_volunteer");
+							$statement = $pdo->prepare("SELECT * FROM tbl_quotes");
 							$statement->execute();
 							$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 							foreach ($result as $row) {
@@ -35,15 +37,19 @@
 							?>
 								<tr>
 									<td><?php echo $i; ?></td>
+									<td><?php echo $row['productName']; ?></td>
 									<td><?php echo $row['fullname']; ?></td>
-									<td><?php echo $row['email']; ?></td>
-									<td><?php echo $row['phone']; ?></td>
 									<td><?php echo $row['address']; ?></td>
-									<td><?php echo $row['organisation']; ?></td>
+									<td><?php echo $row['company']; ?></td>
+									<td><?php echo $row['country']; ?></td>
+									<td><?php echo $row['message']; ?></td>
+									<td><?php echo $row['phone']; ?></td>
+									<td><?php echo $row['email']; ?></td>
 									<td>
-										<a href="#" class="btn btn-danger btn-xs" data-href="volunteer-delete.php?id=<?php echo $row['id']; ?>" data-toggle="modal" data-target="#confirm-delete">Delete</a>
+										<a href="#" class="btn btn-danger btn-xs" data-href="quotes-delete.php?id=<?php echo $row['id']; ?>" data-toggle="modal" data-target="#confirm-delete">Delete</a>
 									</td>
 								</tr>
+
 							<?php
 							}
 							?>

@@ -148,7 +148,7 @@ class Admin
         // $sql = "SELECT * FROM {$this->table} LIMIT :limit OFFSET :skip";
         $sql = "SELECT p.*, pi.src AS image_src 
         FROM {$this->table} p 
-        LEFT JOIN productImages pi ON p.id = pi.productId AND pi.id = (SELECT MIN(id) FROM productImages WHERE productId = p.id)
+        LEFT JOIN productimages pi ON p.id = pi.productId AND pi.id = (SELECT MIN(id) FROM productimages WHERE productId = p.id)
         LIMIT :limit OFFSET :skip";
 
 

@@ -1,3 +1,7 @@
+<?php
+$cur_page = 'index';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 

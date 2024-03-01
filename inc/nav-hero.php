@@ -18,17 +18,17 @@
         </a>
 
         <div class="hidden sm:flex">
-            <div class="nav-item pt-10">
-                <p onmouseover="handleMouseOverFunctions('drop-menu', 'arrow1')" onmouseleave="hidedropdown('drop-menu')" id="product">
-                    <a href="./contact.php">Products</a>
+            <div class="nav-item pt-10 <?php echo $cur_page == 'products' ? "active" : "" ?>">
+                <p id="product">
+                    <a href="./products.php">Products</a>
                     <!-- <span class="relative">
             <i id="arrow1" class="fa-sharp fa-solid fa-angle-down fa-fade"></i>
             </span> -->
                 </p>
             </div>
-            <div class="nav-item pt-10"><a href="./contact.php">Contact Us</a></div>
+            <div class="nav-item pt-10 <?php echo $cur_page == 'contact' ? "active" : "" ?>"><a href="./contact.php">Contact Us</a></div>
 
-            <div class="nav-item pt-10 active">
+            <div class="nav-item pt-10 <?php echo $cur_page == 'about' ? "active" : "" ?>">
                 <a href="./about.php"> About Us</a>
             </div>
         </div>
@@ -70,16 +70,16 @@
     <div class="hidden bg-white z-10 items-center justify-between w-full" id="mobile-menu-2">
         <ul class="flex flex-col font-medium text-xl text-center">
             <li>
-                <a href="#" class="block py-2 pl-3 pr-4 text-white bg-yellow-400 rounded dark:text-white" aria-current="page">Home</a>
+                <a href="./index.php" class="block py-2 pl-3 pr-4 text-gray-700  <?php echo $cur_page == 'index' ? "bg-yellow-400 text-white" : "" ?>  rounded dark:text-white" aria-current="page">Home</a>
             </li>
             <li>
-                <a href="./products.php" class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Products</a>
+                <a href="./products.php" class="block py-2 pl-3 pr-4 text-gray-700 <?php echo $cur_page == 'products' ? "bg-yellow-400 text-white" : "" ?>  border-b border-gray-100 hover:bg-gray-50 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Products</a>
             </li>
             <li>
-                <a href="./contact.php" class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Contact Us</a>
+                <a href="./contact.php" class="block py-2 pl-3 pr-4 text-gray-700 <?php echo $cur_page == 'contact' ? "bg-yellow-400 text-white" : "" ?>  border-b border-gray-100 hover:bg-gray-50 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Contact Us</a>
             </li>
             <li>
-                <a href="./about.php" class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">About Us</a>
+                <a href="./about.php" class="block py-2 pl-3 pr-4 text-gray-700 <?php echo $cur_page == 'about' ? "bg-yellow-400 text-white" : "" ?>  border-b border-gray-100 hover:bg-gray-50 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">About Us</a>
             </li>
         </ul>
     </div>
