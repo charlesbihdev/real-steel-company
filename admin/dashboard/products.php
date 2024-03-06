@@ -36,9 +36,10 @@
 						<tbody>
 							<?php
 							$i = 0;
-							$statement = $pdo->prepare("SELECT p.*, pi.src AS image_src 
+							$statement = $pdo->prepare("SELECT p.*, pi.src AS image_src, c.name AS category_name
 							FROM products p 
-							LEFT JOIN productImages pi ON p.id = pi.productId AND pi.id = (SELECT MIN(id) FROM productImages WHERE productId = p.id)");
+							LEFT JOIN productimages pi ON p.id = pi.productId AND pi.id = (SELECT MIN(id) FROM productimages WHERE productId = p.id)
+							LEFT JOIN categories c ON p.category = c.id");
 							$statement->execute();
 							$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 							foreach ($result as $row) {
@@ -58,7 +59,7 @@
 									<td><?php echo $row['productName']; ?></td>
 									<td><?php echo $row['brand']; ?></td>
 									<td>
-										<?php echo $row['category']; ?>
+										<?php echo $row['category_name']; ?>
 									</td>
 									<td>
 										<?php echo $row['poweredBy']; ?>

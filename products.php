@@ -8,10 +8,12 @@ $cur_page = 'products';
 
 $Products = new Admin($pdo, "products");
 $Categories = new Admin($pdo, "categories");
-$fetchCategory = $Categories->readAll('id');
+$fetchCategory = $Categories->readWithNoRestriction();
 
 $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
-$totalRecords = $Products->getTotalRecords();
+$categories = isset($_GET['category']) ? $_GET['category'] : array();
+
+$totalRecords = $Products->getTotalRecords($categories);
 $limit = 9;
 // Calculate the total number of pages
 $totalPages = ceil($totalRecords / $limit);
@@ -19,34 +21,20 @@ $totalPages = ceil($totalRecords / $limit);
 // Ensure that the current page is within the valid range
 $page = min($currentPage, $totalPages);
 $skip = $limit * ($page - 1);
-$fetchProducts = $Products->getPaginatedData($limit, $skip);
+
+
+$numAdjacentPages = 2;
+
+// exit;
+// 2. Construct an SQL query using these category IDs
+if (!empty($categories)) {
+  $fetchProducts = $Products->getPaginatedData($limit, $skip, $categories);
+} else {
+  $fetchProducts = $Products->getPaginatedData($limit, $skip);
+}
 
 
 
-// print_r($fetchProducts);
-// if (isset($_POST['submit'])) {
-//   $quote = new Admin($pdo, "tbl_quote");
-
-
-//   $firstname = $_POST['firstname'];
-//   $details = $_POST['details'];
-//   $type = $_POST['type'];
-//   $phone = $_POST['phone'];
-//   $email = $_POST['email'];
-
-
-//   $quoteInfo = [
-//     'firstname' => $firstname,
-//     'details' => $details,
-//     'type' => $type,
-//     'phone' => $phone,
-//     'email' => $email,
-//   ];
-
-//   if ($quote->create($quoteInfo)) {
-//     $message = 'Quote submitted Successfully';
-//   }
-// }
 ?>
 
 <!DOCTYPE html>
@@ -186,30 +174,12 @@ $fetchProducts = $Products->getPaginatedData($limit, $skip);
                       <div class="space-y-6">
                         <?php foreach ($fetchCategory as $category) { ?>
                           <div class="flex items-center">
-                            <input id="filter-mobile-color-0" name="category[]" value="<?php echo $category['name'] ?>" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                            <input id="filter-mobile-color-0" name="category[]" value="<?php echo $category['name'] ?>" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" <?php echo in_array($category['id'], $categories) ? 'checked' : 'jj' ?>>
+
                             <label for="filter-mobile-color-0" class="ml-3 min-w-0 flex-1 text-gray-500"><?php echo $category['name'] ?></label>
                           </div>
                         <?php } ?>
-                        <!-- <div class="flex items-center">
-                          <input id="filter-mobile-color-1" name="color[]" value="beige" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                          <label for="filter-mobile-color-1" class="ml-3 min-w-0 flex-1 text-gray-500">Beige</label>
-                        </div>
-                        <div class="flex items-center">
-                          <input id="filter-mobile-color-2" name="color[]" value="blue" type="checkbox" checked class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                          <label for="filter-mobile-color-2" class="ml-3 min-w-0 flex-1 text-gray-500">Blue</label>
-                        </div>
-                        <div class="flex items-center">
-                          <input id="filter-mobile-color-3" name="color[]" value="brown" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                          <label for="filter-mobile-color-3" class="ml-3 min-w-0 flex-1 text-gray-500">Brown</label>
-                        </div>
-                        <div class="flex items-center">
-                          <input id="filter-mobile-color-4" name="color[]" value="green" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                          <label for="filter-mobile-color-4" class="ml-3 min-w-0 flex-1 text-gray-500">Green</label>
-                        </div>
-                        <div class="flex items-center">
-                          <input id="filter-mobile-color-5" name="color[]" value="purple" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                          <label for="filter-mobile-color-5" class="ml-3 min-w-0 flex-1 text-gray-500">Purple</label>
-                        </div> -->
+
                       </div>
                     </div>
                   </div>
@@ -224,34 +194,14 @@ $fetchProducts = $Products->getPaginatedData($limit, $skip);
               <h1 class="text-4xl font-bold tracking-tight text-gray-900">Filter</h1>
 
               <div class="flex items-center">
-                <!-- <div class="relative inline-block text-left"> -->
-                <!-- <div>
-                <button type="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" id="menu-button" aria-expanded="false" aria-haspopup="true">
-                  Sort
-                  <svg class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-                  </svg>
-                </button>
-              </div> -->
 
-                <!--
-                Dropdown menu, show/hide based on menu state.
-  
-                Entering: "transition ease-out duration-100"
-                  From: "transform opacity-0 scale-95"
-                  To: "transform opacity-100 scale-100"
-                Leaving: "transition ease-in duration-75"
-                  From: "transform opacity-100 scale-100"
-                  To: "transform opacity-0 scale-95"
-              -->
-
-                <!-- </div> -->
 
                 <button type="button" class="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7">
                   <span class="sr-only">View grid</span>
-                  <svg class="h-5 w-5" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor">
+                  <!-- <svg class="h-5 w-5" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M4.25 2A2.25 2.25 0 002 4.25v2.5A2.25 2.25 0 004.25 9h2.5A2.25 2.25 0 009 6.75v-2.5A2.25 2.25 0 006.75 2h-2.5zm0 9A2.25 2.25 0 002 13.25v2.5A2.25 2.25 0 004.25 18h2.5A2.25 2.25 0 009 15.75v-2.5A2.25 2.25 0 006.75 11h-2.5zm9-9A2.25 2.25 0 0011 4.25v2.5A2.25 2.25 0 0013.25 9h2.5A2.25 2.25 0 0018 6.75v-2.5A2.25 2.25 0 0015.75 2h-2.5zm0 9A2.25 2.25 0 0011 13.25v2.5A2.25 2.25 0 0013.25 18h2.5A2.25 2.25 0 0018 15.75v-2.5A2.25 2.25 0 0015.75 11h-2.5z" clip-rule="evenodd" />
-                  </svg>
+                  </svg> -->
+                  <!-- <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-1 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none">Filter</button> -->
                 </button>
                 <button type="button" class="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden">
                   <span class="sr-only">Filters</span>
@@ -267,7 +217,7 @@ $fetchProducts = $Products->getPaginatedData($limit, $skip);
 
               <div class="">
                 <!-- Filters -->
-                <form class="hidden lg:block">
+                <form action="" method="GET" class="hidden lg:block">
 
 
                   <div class="border-b border-gray-200 py-6">
@@ -295,31 +245,14 @@ $fetchProducts = $Products->getPaginatedData($limit, $skip);
                         <?php foreach ($fetchCategory as $category) { ?>
 
                           <div class="flex items-center">
-                            <input id="filter-color-0" name="color[]" value="<?php echo $category['name'] ?>" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                            <label for="filter-color-0" class="ml-3 text-sm text-gray-600"><?php echo $category['name'] ?></label>
+                            <input id="filter-mobile-color-0" name="category[]" value="<?php echo $category['id'] ?>" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" <?php echo in_array($category['id'], $categories) ? 'checked' : 'jj' ?>>
+
+                            <label for="filter-color-0" class="ml-3 text-md text-gray-600"><?php echo $category['name'] ?></label>
                           </div>
                         <?php } ?>
 
-                        <!-- <div class="flex items-center">
-                          <input id="filter-color-1" name="color[]" value="beige" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                          <label for="filter-color-1" class="ml-3 text-sm text-gray-600">Beige</label>
-                        </div>
-                        <div class="flex items-center">
-                          <input id="filter-color-2" name="color[]" value="blue" type="checkbox" checked class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                          <label for="filter-color-2" class="ml-3 text-sm text-gray-600">Blue</label>
-                        </div>
-                        <div class="flex items-center">
-                          <input id="filter-color-3" name="color[]" value="brown" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                          <label for="filter-color-3" class="ml-3 text-sm text-gray-600">Brown</label>
-                        </div>
-                        <div class="flex items-center">
-                          <input id="filter-color-4" name="color[]" value="green" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                          <label for="filter-color-4" class="ml-3 text-sm text-gray-600">Green</label>
-                        </div>
-                        <div class="flex items-center">
-                          <input id="filter-color-5" name="color[]" value="purple" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                          <label for="filter-color-5" class="ml-3 text-sm text-gray-600">Purple</label>
-                        </div> -->
+                        <!-- <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-14 py-2 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none">Filter</button> -->
+                        <button type="submit" class="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-lg font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">Filter</button>
                       </div>
                     </div>
                   </div>
@@ -354,10 +287,10 @@ $fetchProducts = $Products->getPaginatedData($limit, $skip);
         <?php foreach ($fetchProducts as $product) { ?>
           <!--   ✅ Product card - Starts Here 👇 -->
           <div class="product bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-            <a href="./list-product.php?page=<?php echo $page ?>&id=<?php echo $product['id'] ?>">
+            <a href="./list-product.php?page=<?php echo $page ?>&id=<?php echo $product['id'] ?><?php echo buildQueryString($_GET); ?>">
               <img src="./admin/assets/products/<?php echo $product['image_src'] ?>" alt="Product" class="h-80 w-full object-cover rounded-t-xl" />
               <div class="px-4 py-3">
-                <span class="text-gray-400 mr-3 uppercase text-xs"><?php echo $product['category'] ?></span>
+                <span class="text-gray-400 mr-3 uppercase text-xs"><?php echo $product['category_name'] ?></span>
                 <p class="text-2xl font-bold text-black block capitalize"><?php echo $product['productName'] ?></p>
                 <div class="flex items-center">
                   <p class="text-lg font-semibold text-green-600 cursor-auto my-3"><?php echo $product['isNew'] ? 'New' : 'Used'; ?></p>
@@ -382,21 +315,18 @@ $fetchProducts = $Products->getPaginatedData($limit, $skip);
           <ul class="flex list-style-none">
             <!-- Previous Page Link -->
             <li class="page-item <?php echo ($page <= 1) ? 'disabled' : ''; ?>">
-              <a href="./products.php?page=<?php echo ($page <= 1) ? '1' : ($page - 1); ?>" class="relative block px-3 py-1.5 mr-3 text-base text-gray-700 transition-all duration-300 rounded-md dark:text-gray-400 hover:text-gray-100 hover:bg-blue-100">Previous</a>
+              <a href="./products.php?page=<?php echo ($page <= 1) ? '1' : ($page - 1); ?><?php echo buildQueryString($_GET); ?>" class="relative block px-3 py-1.5 mr-3 text-base text-gray-700 transition-all duration-300 rounded-md dark:text-gray-400 hover:text-gray-100 hover:bg-blue-100">Previous</a>
             </li>
 
             <!-- Page Links -->
             <?php
-            // Define the number of pages to show before and after the current page
-            $numAdjacentPages = 2;
-
             // Loop through pages and display ellipsis if needed
             for ($i = 1; $i <= $totalPages; $i++) :
               // Show first and last pages
               if ($i == 1 || $i == $totalPages || abs($i - $page) <= $numAdjacentPages) :
             ?>
                 <li class="page-item <?php echo ($page == $i) ? 'active' : ''; ?>">
-                  <a href="./products.php?page=<?php echo $i; ?>" class="relative block px-1.5 py-1 mr-2 text-base <?php echo ($page == $i) ? 'text-gray-100 bg-blue-600' : 'text-gray-700 dark:text-gray-400 hover:bg-blue-100'; ?> transition-all duration-300 rounded-md"><?php echo $i; ?></a>
+                  <a href="./products.php?page=<?php echo $i; ?><?php echo buildQueryString($_GET); ?>" class="relative block px-1.5 py-1 mr-2 text-base <?php echo ($page == $i) ? 'text-gray-100 bg-blue-600' : 'text-gray-700 dark:text-gray-400 hover:bg-blue-100'; ?> transition-all duration-300 rounded-md"><?php echo $i; ?></a>
                 </li>
               <?php
               // Show ellipsis if not contiguous
@@ -412,7 +342,7 @@ $fetchProducts = $Products->getPaginatedData($limit, $skip);
 
             <!-- Next Page Link -->
             <li class="page-item <?php echo ($page >= $totalPages) ? 'disabled' : ''; ?>">
-              <a href="./products.php?page=<?php echo ($page >= $totalPages) ? $totalPages : ($page + 1); ?>" class="mr-8 relative block px-1 py-1 text-base text-gray-700 transition-all duration-300 dark:text-gray-400 dark:hover:bg-gray-700 hover:bg-blue-100 rounded-md">Next</a>
+              <a href="./products.php?page=<?php echo ($page >= $totalPages) ? $totalPages : ($page + 1); ?><?php echo buildQueryString($_GET); ?>" class="mr-8 relative block px-1 py-1 text-base text-gray-700 transition-all duration-300 dark:text-gray-400 dark:hover:bg-gray-700 hover:bg-blue-100 rounded-md">Next</a>
             </li>
           </ul>
 
@@ -425,6 +355,9 @@ $fetchProducts = $Products->getPaginatedData($limit, $skip);
             Showing <span class="font-semibold text-gray-900 dark:text-white"><?php echo $startRange; ?></span> to <span class="font-semibold text-gray-900 dark:text-white"><?php echo $endRange; ?></span> of <span class="font-semibold text-gray-900 dark:text-white"><?php echo $totalRecords ?></span> Entries
           </span>
         </section>
+
+
+
       </div>
 
     </div>

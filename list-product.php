@@ -102,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h1 class="font-extrabold text-7xl text-center pt-36 text-white">Products Listing</h1>
     </section>
     <section class="flex flex-wrap mx-6 mt-6 justify-between">
-        <a href="./products.php?page=<?php echo $page ?>">
+        <a href="./products.php?page=<?php echo $page ?><?php echo buildQueryString($_GET); ?>">
             <button type="button" class="w-full flex items-center justify-center w-1/2 px-5 py-2 text-lg text-gray-700 transition-colors duration-200 bg-gray-300 hover:bg-gray-400 border rounded-lg sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-gray-200 dark:border-gray-700 ">
                 <svg class="w-5 h-5 rtl:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
@@ -362,6 +362,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </div>
     </section>
+
 
 
     <?php require_once './inc/footer.php' ?>

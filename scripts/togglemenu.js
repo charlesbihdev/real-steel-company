@@ -52,19 +52,23 @@ function navOpenClose() {
 // }
 
 // Add a click event listener to the button
-toggleButton.addEventListener("click", function () {
-  console.log("click");
-  // Check if the video is paused
-  if (video.paused) {
-    // If paused, play the video
-    video.play();
-    toggleButton.src = "./icons/pause.png";
-  } else {
-    // If playing, pause the video
-    video.pause();
-    toggleButton.src = "./icons/play.png";
-  }
-});
+
+// Check if the video is paused
+
+if (toggleButton) {
+  toggleButton.addEventListener("click", function () {
+    console.log("click");
+    if (video.paused) {
+      // If paused, play the video
+      video.play();
+      toggleButton.src = "./icons/pause.png";
+    } else {
+      // If playing, pause the video
+      video.pause();
+      toggleButton.src = "./icons/play.png";
+    }
+  });
+}
 
 // function toggleArrow(idname) {
 //   const arrow = document.getElementById(idname);

@@ -136,7 +136,7 @@ $CategoriesOptions = $Productscategories->readAll('id');
 									// Assuming $CategoriesOptions contains the categories
 									foreach ($CategoriesOptions as $categoryOption) {
 										// Output each category as an option
-										echo '<option value="' . $categoryOption['name'] . '"';
+										echo '<option value="' . $categoryOption['id'] . '"';
 										echo '>' . $categoryOption['name'] . '</option>';
 									}
 									?>

@@ -181,8 +181,8 @@ foreach ($result as $row) {
 									// Assuming $CategoriesOptions contains the categories
 									foreach ($CategoriesOptions as $categoryOption) {
 										// Output each category as an option
-										echo '<option value="' . $categoryOption['name'] . '"';
-										if ($categoryOption['name'] == $category) {
+										echo '<option value="' . $categoryOption['id'] . '"';
+										if ($categoryOption['id'] == $category) {
 											echo ' selected';
 										}
 										echo '>' . $categoryOption['name'] . '</option>';

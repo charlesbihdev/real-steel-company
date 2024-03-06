@@ -127,29 +127,57 @@ class Admin
         $stmt->bindParam(':farmer_id', $farmer_id, PDO::PARAM_INT);
         return $stmt->execute();
     }
-    public function getTotalRecords()
+    public function getTotalRecords($categories = array())
     {
-        // Prepare SQL query to count total records
-        $sql = "SELECT COUNT(*) AS total_records FROM {$this->table}";
+        // Construct the base SQL query
+        $sql = "SELECT COUNT(*) AS totalRecords FROM {$this->table}";
+
+        // Add WHERE clause if categories are provided
+        if (!empty($categories)) {
+            $categoryConditions = array();
+            foreach ($categories as $category) {
+                $categoryConditions[] = "category = ?";
+            }
+            $sql .= " WHERE " . implode(" OR ", $categoryConditions);
+        }
+
+        // Prepare the SQL statement
+        $stmt = $this->conn->prepare($sql);
+
+        // Bind parameters if categories are provided
+        if (!empty($categories)) {
+            $i = 1;
+            foreach ($categories as $category) {
+                $stmt->bindValue($i, $category);
+                $i++;
+            }
+        }
 
         // Execute the query
-        $stmt = $this->conn->prepare($sql);
         $stmt->execute();
 
-        // Fetch the result
+        // Fetch the total number of records
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // Return the total number of records
-        return $result['total_records'];
+        return $result['totalRecords'];
     }
-    public function getPaginatedData($limit, $skip = 0)
+    public function getPaginatedData($limit, $skip = 0, $categories = array())
     {
         // Build the SQL query
-        // $sql = "SELECT * FROM {$this->table} LIMIT :limit OFFSET :skip";
-        $sql = "SELECT p.*, pi.src AS image_src 
-        FROM {$this->table} p 
-        LEFT JOIN productimages pi ON p.id = pi.productId AND pi.id = (SELECT MIN(id) FROM productimages WHERE productId = p.id)
-        LIMIT :limit OFFSET :skip";
+        if (!empty($categories)) {
+            $categoryIds = implode(",", $categories);
+            $sql = "SELECT p.*, pi.src AS image_src, c.name AS category_name
+            FROM {$this->table} p 
+            LEFT JOIN productimages pi ON p.id = pi.productId AND pi.id = (SELECT MIN(id) FROM productimages WHERE productId = p.id)
+            LEFT JOIN categories c ON p.category = c.id
+            WHERE category IN ($categoryIds)
+            LIMIT :limit OFFSET :skip";
+        } else {
+            $sql = "SELECT p.*, pi.src AS image_src, c.name AS category_name
+            FROM {$this->table} p 
+            LEFT JOIN productimages pi ON p.id = pi.productId AND pi.id = (SELECT MIN(id) FROM productimages WHERE productId = p.id)
+            LEFT JOIN categories c ON p.category = c.id
+            LIMIT :limit OFFSET :skip";
+        }
 
 
         // Prepare the SQL statement
@@ -318,3 +346,21 @@ function genWitnessRandom($length = 6)
     }
     return $randomString;
 };
+
+// Function to build query string from array
+function buildQueryString($params)
+{
+    $queryString = '';
+    foreach ($params as $key => $value) {
+        if ($key === 'category' || $key === 'category[]') {
+            if (is_array($value)) {
+                foreach ($value as $val) {
+                    $queryString .= '&' . $key . '[]=' . urlencode($val);
+                }
+            } else {
+                $queryString .= '&' . $key . '=' . urlencode($value);
+            }
+        }
+    }
+    return $queryString;
+}
