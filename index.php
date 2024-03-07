@@ -9,20 +9,24 @@ $cur_page = 'index';
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Real Steel co. Ltd</title>
-
   <!-- <link rel="manifest" href="./favicon/site.webmanifest" /> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="./styles/footer.css" />
   <link href="https://fonts.googleapis.com/css?family=Barlow Condensed" rel="stylesheet" />
   <link rel="stylesheet" href="./styles/style.css" />
+  <!-- favicon  -->
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+  <link rel="manifest" href="./favicon/site.webmanifest">
 </head>
 
 <body>
   <div class="mandatory-scroll-snapping" dir="ltr">
     <section class="bg-black snap-child relative h-screen flex flex-col text-center text-white">
       <div class="blur-element video-docker absolute top-0 left-0 w-full h-full overflow-hidden">
-        <video id="myVideo" class="min-w-full min-h-full absolute object-cover" src="./hero-video/hero-vid.mp4" type="video/mp4" autoplay muted loop></video>
+        <video id="myVideo" class="min-w-full min-h-full absolute object-cover" src="./hero-video/hero-vid.mp4" type="video/mp4" autoplay muted loop poster="./hero-video/frame1.png"></video>
       </div>
       <nav class="z-10 flex justify-between mt-10 text-2xl">
         <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="true">

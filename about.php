@@ -8,7 +8,7 @@ $cur_page = 'about';
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Real Steel co. Ltd</title>
+  <title>About Us - Real Steel co. Ltd</title>
 
   <!-- <link rel="manifest" href="./favicon/site.webmanifest" /> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -17,6 +17,11 @@ $cur_page = 'about';
   <link href="https://fonts.googleapis.com/css?family=Barlow Condensed" rel="stylesheet" />
   <!-- <link rel="stylesheet" href="./style.css" /> -->
   <link rel="stylesheet" href="./styles/nav.css" />
+  <!-- favicon  -->
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+  <link rel="manifest" href="./favicon/site.webmanifest">
 
 </head>
 
