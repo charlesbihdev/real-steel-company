@@ -63,11 +63,13 @@ nav ul li:hover,
   height: 85px;
   width: 180px;
 }
-@media (max-width: 639px) {
-  .filter-div {
-    display: none;
-  }
 
+.icon {
+  width: 40px; /* Adjust the width as needed */
+  height: 40px; /* Adjust the height as needed */
+}
+
+@media (max-width: 639px) {
   .ss-mb {
     margin-bottom: 10px;
   }
@@ -79,5 +81,11 @@ nav ul li:hover,
   .logo {
     height: 80px;
     width: 150px;
+  }
+}
+
+@media (max-width: 1024px) {
+  #filter-div {
+    display: none;
   }
 }

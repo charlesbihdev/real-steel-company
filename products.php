@@ -20,7 +20,8 @@ $totalPages = ceil($totalRecords / $limit);
 
 // Ensure that the current page is within the valid range
 $page = min($currentPage, $totalPages);
-$skip = $limit * ($page - 1);
+$skip = ($page <= 1) ? 0 : $limit * ($page - 1);
+
 
 
 $numAdjacentPages = 2;
@@ -76,8 +77,8 @@ if (!empty($categories)) {
   </section>
 
 
-  <div class="grid grid-cols-1 sm:grid-cols-12 grid-rows-1 sm:gap-4 w-screen">
-    <div class="filter-div sm:col-span-3">
+  <div class="grid grid-cols-1 lg:grid-cols-12 grid-rows-1 lg:gap-4 w-screen">
+    <div id="filter-div" class="lg:col-span-3">
 
       <!--
   This example requires some changes to your config:
@@ -124,50 +125,34 @@ if (!empty($categories)) {
               From: "translate-x-0"
               To: "translate-x-full"
           -->
-              <div style="display: none;" class=" relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
+              <div style="" class="relative ml-auto sm:flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
                 <div class="flex items-center justify-between px-4">
-                  <h2 class="text-lg font-medium text-gray-900">FiltersFF</h2>
-                  <button type="button" class="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400">
+                  <h2 class="text-2xl text-gray-900">Filter List</h2>
+                  <button id="close-icon" type="button" class="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-black">
                     <span class="sr-only">Close menu</span>
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <svg class="icon h-10 w-10" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" aria-hidden="true">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
+
                   </button>
                 </div>
 
                 <!-- Filters -->
-                <form class="mt-4 border-t border-gray-200">
-                  <!-- <h3 class="sr-only">Categories</h3> -->
-                  <!-- <ul role="list" class="px-2 py-3 font-medium text-gray-900">
-                <li>
-                  <a href="#" class="block px-2 py-3">Totes</a>
-                </li>
-                <li>
-                  <a href="#" class="block px-2 py-3">Backpacks</a>
-                </li>
-                <li>
-                  <a href="#" class="block px-2 py-3">Travel Bags</a>
-                </li>
-                <li>
-                  <a href="#" class="block px-2 py-3">Hip Bags</a>
-                </li>
-                <li>
-                  <a href="#" class="block px-2 py-3">Laptop Sleeves</a>
-                </li>
-              </ul> -->
+                <form action="" method="GET" class="mt-4 border-t border-gray-200">
+
 
                   <div class="border-t border-gray-200 px-4 py-6">
                     <h3 class="-mx-2 -my-3 flow-root">
                       <!-- Expand/collapse section button -->
-                      <button type="button" class="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500" aria-controls="filter-section-mobile-0" aria-expanded="false">
+                      <button type="button" class="flex w-full items-center justify-between bg-white px-2 py-3 text-black hover:text-gray-500" aria-controls="filter-section-mobile-0" aria-expanded="false">
                         <span class="font-medium text-gray-900">Category</span>
                         <span class="ml-6 flex items-center">
                           <!-- Expand icon, show/hide based on section open state. -->
-                          <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <svg class="h-5 w-5 text-black" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
                           </svg>
                           <!-- Collapse icon, show/hide based on section open state. -->
-                          <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <svg class="h-5 w-5 text-black" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd" d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z" clip-rule="evenodd" />
                           </svg>
                         </span>
@@ -178,11 +163,14 @@ if (!empty($categories)) {
                       <div class="space-y-6">
                         <?php foreach ($fetchCategory as $category) { ?>
                           <div class="flex items-center">
-                            <input id="filter-mobile-color-0" name="category[]" value="<?php echo $category['name'] ?>" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" <?php echo in_array($category['id'], $categories) ? 'checked' : 'jj' ?>>
+                            <input id="filter-mobile-color-0" name="category[]" value="<?php echo $category['id'] ?>" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" <?php echo in_array($category['id'], $categories) ? 'checked' : 'jj' ?>>
 
                             <label for="filter-mobile-color-0" class="ml-3 min-w-0 flex-1 text-gray-500"><?php echo $category['name'] ?></label>
                           </div>
                         <?php } ?>
+
+                        <button type="submit" class="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-lg font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">Filter</button>
+
 
                       </div>
                     </div>
@@ -275,11 +263,11 @@ if (!empty($categories)) {
 
 
     </div>
-    <div class=" sm:col-span-9 sm:col-start-4 ">
+    <div class=" lg:col-span-9 lg:col-start-4 ">
 
 
       <!-- source: https://github.com/mfg888/Responsive-Tailwind-CSS-Grid/blob/main/index.html -->
-      <button type="button" class="flex -m-2 mt-4 mx-12 p-2 text-2xl text-gray-400 hover:text-gray-500 sm:ml-6 sm:hidden">
+      <button id="filter-trigger" type="button" class="flex -m-2 mt-4 mx-12 p-2 text-2xl text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden">
         <span class="mr-4">Filters</span>
         <svg class="h-8 w-8" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M2.628 1.601C5.028 1.206 7.49 1 10 1s4.973.206 7.372.601a.75.75 0 01.628.74v2.288a2.25 2.25 0 01-.659 1.59l-4.682 4.683a2.25 2.25 0 00-.659 1.59v3.037c0 .684-.31 1.33-.844 1.757l-1.937 1.55A.75.75 0 018 18.25v-5.757a2.25 2.25 0 00-.659-1.591L2.659 6.22A2.25 2.25 0 012 4.629V2.34a.75.75 0 01.628-.74z" clip-rule="evenodd" />
@@ -382,6 +370,7 @@ if (!empty($categories)) {
   </script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
 
+  <script src="./scripts/mobile-filter-toggle.js"></script>
   <script src="./scripts/togglemenu.js"></script>
 </body>
 
