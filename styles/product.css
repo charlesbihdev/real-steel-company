@@ -88,4 +88,9 @@ nav ul li:hover,
   #filter-div {
     display: none;
   }
+
+  .nav-hero {
+    /* border: 1px solid white; */
+    height: 50vh;
+  }
 }

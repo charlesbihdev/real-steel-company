@@ -72,3 +72,10 @@ nav ul li:hover,
     width: 150px;
   }
 }
+
+@media (max-width: 1024px) {
+  .nav-hero {
+    /* border: 1px solid white; */
+    height: 50vh;
+  }
+}

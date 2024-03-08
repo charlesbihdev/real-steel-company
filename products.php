@@ -13,14 +13,16 @@ $fetchCategory = $Categories->readWithNoRestriction();
 $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 $categories = isset($_GET['category']) ? $_GET['category'] : array();
 
-$totalRecords = $Products->getTotalRecords($categories);
+// $totalRecords = $Products->getTotalRecords($categories);
 $limit = 9;
 // Calculate the total number of pages
-$totalPages = ceil($totalRecords / $limit);
+// $totalPages = ceil($totalRecords / $limit);
 
 // Ensure that the current page is within the valid range
-$page = min($currentPage, $totalPages);
-$skip = ($page <= 1) ? 0 : $limit * ($page - 1);
+// $page = min($currentPage, $totalPages);
+// $skip = ($page <= 1) ? 0 : $limit * ($page - 1);
+
+
 
 
 
@@ -28,11 +30,11 @@ $numAdjacentPages = 2;
 
 // exit;
 // 2. Construct an SQL query using these category IDs
-if (!empty($categories)) {
-  $fetchProducts = $Products->getPaginatedData($limit, $skip, $categories);
-} else {
-  $fetchProducts = $Products->getPaginatedData($limit, $skip);
-}
+// if (!empty($categories)) {
+//   $fetchProducts = $Products->getPaginatedData($limit, $skip, $categories);
+// } else {
+//   $fetchProducts = $Products->getPaginatedData($limit, $skip);
+// }
 
 
 
@@ -58,6 +60,11 @@ if (!empty($categories)) {
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
   <link rel="manifest" href="./favicon/site.webmanifest">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- paginate library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css" />
   <style>
     .product {
       width: 260px;
@@ -67,10 +74,12 @@ if (!empty($categories)) {
       overflow-x: hidden;
     }
   </style>
+
 </head>
 
 <body>
   <?php require_once './inc/nav-hero.php' ?>
+
 
 
   <h1 class="font-extrabold text-7xl px-4 text-center pt-36 text-white">Products Listing</h1>
@@ -169,7 +178,7 @@ if (!empty($categories)) {
                           </div>
                         <?php } ?>
 
-                        <button type="submit" class="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-lg font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">Filter</button>
+                        <!-- <button type="submit" class="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-lg font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">Filter</button> -->
 
 
                       </div>
@@ -244,7 +253,7 @@ if (!empty($categories)) {
                         <?php } ?>
 
                         <!-- <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-14 py-2 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none">Filter</button> -->
-                        <button type="submit" class="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-lg font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">Filter</button>
+                        <!-- <button type="submit" class="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-lg font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">Filter</button> -->
                       </div>
                     </div>
                   </div>
@@ -275,77 +284,14 @@ if (!empty($categories)) {
       </button>
 
       <!-- ✅ Grid Section - Starts Here 👇 -->
-      <section id="Projects" class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-8 gap-x-6 mt-10 mb-5">
-        <?php foreach ($fetchProducts as $product) { ?>
-          <!--   ✅ Product card - Starts Here 👇 -->
-          <div class="product bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-            <a href="./list-product.php?page=<?php echo $page ?>&id=<?php echo $product['id'] ?><?php echo buildQueryString($_GET); ?>">
-              <img src="./admin/assets/products/<?php echo $product['image_src'] ?>" alt="Product" class="h-80 w-full object-cover rounded-t-xl" />
-              <div class="px-4 py-3">
-                <span class="text-gray-400 mr-3 uppercase text-xs"><?php echo $product['category_name'] ?></span>
-                <p class="text-2xl font-bold text-black block capitalize"><?php echo $product['productName'] ?></p>
-                <div class="flex items-center">
-                  <p class="text-lg font-semibold text-green-600 cursor-auto my-3"><?php echo $product['isNew'] ? 'New' : 'Used'; ?></p>
-                  <span>
-                    <p class="text-sm text-gray-600 cursor-auto ml-2 "><?php echo $product['poweredBy'] ?></p>
-                  </span>
-                  <!-- <div class="ml-auto"> -->
-                  <!-- <i class="fa-solid fa-arrow-right"></i> -->
-                  <i style="font-size: x-large;" class="hover:text-yellow-500 ml-auto fa-regular fa-circle-right"></i>
-                  <!-- </div> -->
-                </div>
-              </div>
-            </a>
-          </div>
-          <!--   🛑 Product card- Ends Here  -->
-        <?php } ?>
+      <section id="data-container" class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-8 gap-x-6 mt-10 mb-5">
+
       </section>
 
       <!-- 🛑 Grid Section - Ends Here -->
-      <div class="flex justify-end my-6">
-        <section aria-label="page-navigation">
-          <ul class="flex list-style-none">
-            <!-- Previous Page Link -->
-            <li class="page-item <?php echo ($page <= 1) ? 'disabled' : ''; ?>">
-              <a href="./products.php?page=<?php echo ($page <= 1) ? '1' : ($page - 1); ?><?php echo buildQueryString($_GET); ?>" class="relative block px-3 py-1.5 mr-3 text-base text-gray-700 transition-all duration-300 rounded-md dark:text-gray-400 hover:text-gray-100 hover:bg-blue-100">Previous</a>
-            </li>
+      <div class="mr-10 flex justify-end my-6">
+        <section id="pagination" class="ml-12" aria-label="page-navigation">
 
-            <!-- Page Links -->
-            <?php
-            // Loop through pages and display ellipsis if needed
-            for ($i = 1; $i <= $totalPages; $i++) :
-              // Show first and last pages
-              if ($i == 1 || $i == $totalPages || abs($i - $page) <= $numAdjacentPages) :
-            ?>
-                <li class="page-item <?php echo ($page == $i) ? 'active' : ''; ?>">
-                  <a href="./products.php?page=<?php echo $i; ?><?php echo buildQueryString($_GET); ?>" class="relative block px-1.5 py-1 mr-2 text-base <?php echo ($page == $i) ? 'text-gray-100 bg-blue-600' : 'text-gray-700 dark:text-gray-400 hover:bg-blue-100'; ?> transition-all duration-300 rounded-md"><?php echo $i; ?></a>
-                </li>
-              <?php
-              // Show ellipsis if not contiguous
-              elseif ($i == 2 && abs($i - $page) > $numAdjacentPages + 1) :
-              ?>
-                <li class="page-item">
-                  <span class="relative block px-3 py-1.5 mr-3 text-base text-gray-700 transition-all duration-300 rounded-md">...</span>
-                </li>
-            <?php
-              endif;
-            endfor;
-            ?>
-
-            <!-- Next Page Link -->
-            <li class="page-item <?php echo ($page >= $totalPages) ? 'disabled' : ''; ?>">
-              <a href="./products.php?page=<?php echo ($page >= $totalPages) ? $totalPages : ($page + 1); ?><?php echo buildQueryString($_GET); ?>" class="mr-8 relative block px-1 py-1 text-base text-gray-700 transition-all duration-300 dark:text-gray-400 dark:hover:bg-gray-700 hover:bg-blue-100 rounded-md">Next</a>
-            </li>
-          </ul>
-
-          <!-- Pagination Info -->
-          <?php
-          $startRange = ($page - 1) * $limit + 1;
-          $endRange = min($startRange + $limit - 1, $totalRecords);
-          ?>
-          <span class="ml-2 text-gray-700 dark:text-gray-400">
-            Showing <span class="font-semibold text-gray-900 dark:text-white"><?php echo $startRange; ?></span> to <span class="font-semibold text-gray-900 dark:text-white"><?php echo $endRange; ?></span> of <span class="font-semibold text-gray-900 dark:text-white"><?php echo $totalRecords ?></span> Entries
-          </span>
         </section>
 
 
@@ -358,18 +304,13 @@ if (!empty($categories)) {
 
   <?php require_once './inc/footer.php' ?>
 
-  <!-- Support Me 🙏🥰 -->
-  <!-- <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
-  <script>
-    kofiWidgetOverlay.draw('mohamedghulam', {
-      'type': 'floating-chat',
-      'floating-chat.donateButton.text': 'Support me',
-      'floating-chat.donateButton.background-color': '#323842',
-      'floating-chat.donateButton.text-color': '#fff'
-    });
-  </script> -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
 
+
+  <script src="./scripts/product-ajax.js">
+
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
+  <script src="https://pagination.js.org/dist/2.6.0/pagination.min.js"></script>
   <script src="./scripts/mobile-filter-toggle.js"></script>
   <script src="./scripts/togglemenu.js"></script>
 </body>

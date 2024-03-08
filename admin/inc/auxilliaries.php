@@ -169,14 +169,12 @@ class Admin
             FROM {$this->table} p 
             LEFT JOIN productimages pi ON p.id = pi.productId AND pi.id = (SELECT MIN(id) FROM productimages WHERE productId = p.id)
             LEFT JOIN categories c ON p.category = c.id
-            WHERE category IN ($categoryIds)
-            LIMIT :limit OFFSET :skip";
+            WHERE category IN ($categoryIds)";
         } else {
             $sql = "SELECT p.*, pi.src AS image_src, c.name AS category_name
             FROM {$this->table} p 
             LEFT JOIN productimages pi ON p.id = pi.productId AND pi.id = (SELECT MIN(id) FROM productimages WHERE productId = p.id)
-            LEFT JOIN categories c ON p.category = c.id
-            LIMIT :limit OFFSET :skip";
+            LEFT JOIN categories c ON p.category = c.id";
         }
 
 
@@ -184,8 +182,8 @@ class Admin
         $stmt = $this->conn->prepare($sql);
 
         // Bind parameters
-        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
-        $stmt->bindParam(':skip', $skip, PDO::PARAM_INT);
+        // $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        // $stmt->bindParam(':skip', $skip, PDO::PARAM_INT);
 
         // Execute the query
         $stmt->execute();
