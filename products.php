@@ -134,7 +134,7 @@ $numAdjacentPages = 2;
               From: "translate-x-0"
               To: "translate-x-full"
           -->
-              <div style="" class="relative ml-auto sm:flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
+              <div class="relative ml-auto sm:flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
                 <div class="flex items-center justify-between px-4">
                   <h2 class="text-2xl text-gray-900">Filter List</h2>
                   <button id="close-icon" type="button" class="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-black">
